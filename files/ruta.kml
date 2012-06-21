@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1"><Document><Style id="restaurantStyle"><IconStyle id="restaurantIcon"><Icon><href>://maps.google.com/mapfiles/kml/pa4/icon62.png</href></Icon></IconStyle></Style><Style id="barStyle"><IconStyle id="barIcon"><Icon><href>http://maps.google.com/mapfiles/kml/pal2/icon27.png</href></Icon></IconStyle></Style><Placemark id="0000002026"><name>Institucion/Compania: UAM3</name><description>Usuario: MARIO3
+Lat: -99.2273783683748
+Long: 19.51973319053593
+2012-05-15 06:05:32
+GPS_PROVIDER</description><styleUrl>#restaurantStyle</styleUrl><Point><coordinates>-99.2273783683748,19.51973319053593</coordinates></Point></Placemark></Document></kml>
