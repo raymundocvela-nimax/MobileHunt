@@ -3,6 +3,7 @@
 <script language='javascript' src="/js/popcalendar.js"></script> 
 </head>
 <body>
+
         <center> 
          <form name="form1" method="post">
            Calendario<input name="nombre_de_la_caja" type="text" id="dateArrival" onClick="popUpCalendar(this, form1.dateArrival, 'mm-dd-yyyy');" size="10">

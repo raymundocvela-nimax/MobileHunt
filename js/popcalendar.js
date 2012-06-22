@@ -1,4 +1,4 @@
-	var leastYear;
+	var minYear;
     
     var	fixedX = -1			// x position (-1 if to appear below control)
 	var	fixedY = -1			// y position (-1 if to appear below control)
@@ -302,7 +302,8 @@
 			
 //Dentro de el siguiente ciclo se generan los a?os, en el caso de que sea introcir fecha de nacimiento restale 30---- i>=(yearNow-30)-----
 //CAMBIA el siguiente for por este " for	(i=yearNow; i<=(yearNow+4); i++) { " si quieres que los a?os empizen en el actual en adelante		
-			for	(i=yearNow; i>=(leastYear); i--) {		
+			
+            for	(i=yearNow; i>=(minYear); i--) {		
 				sName =	i;
 				if (i==yearSelected){
 					sName =	"<B>" +	sName +	"</B>"
@@ -483,8 +484,11 @@
 		document.getElementById("spanMonth").innerHTML = "&nbsp;" +	monthName[monthSelected] + "&nbsp;<IMG id='changeMonth' SRC='"+imgDir+"drop1.gif' WIDTH='12' HEIGHT='10' BORDER=0>"
 		document.getElementById("spanYear").innerHTML =	"&nbsp;" + yearSelected	+ "&nbsp;<IMG id='changeYear' SRC='"+imgDir+"drop1.gif' WIDTH='12' HEIGHT='10' BORDER=0>"
 	}
-
-	function popUpCalendar(ctl,	ctl2, format,leastYear) {
+//pasamos como ultimo parametro el año minimo para empezar a mostrar en el calendario
+	//function popUpCalendar(ctl,	ctl2, format,year) {
+        function popUpCalendar(ctl,    ctl2, format, year) {
+        minYear=year
+        //ARREGLAR
 		var	leftpos=-190
 		var	toppos=-10
 

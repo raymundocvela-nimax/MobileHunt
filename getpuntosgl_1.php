@@ -131,10 +131,16 @@
     function obtenerDatos(){
         include('conectar.php');
         include('makerutakml_1.php');
-        
+                    
         //adecuar ID usr
         $idUsr=$_REQUEST['usr'];
         $nomInsti=$_REQUEST['nomInsti'];
+      
+        //$fecha=$_REQUEST('fecha');
+        $fechaExplode=explode("-",$fecha);
+        $fechaQuery=date("Y-m-d",mktime(0,0,0,$fechaExplode[1],$fechaExplode[0],$fechaExplode[2]));
+        //echo date("Y-m-d",$_REQUEST('fecha'));
+        echo $fechaQuery;
         
         //obtener nombre Usr segun id
         $result=mysql_query("SELECT usuario FROM usuarios WHERE idusuarios='".$idUsr."'") or die("error".mysql_error());
@@ -171,7 +177,7 @@
         }
         echo "</table> ";
         echo "fintabla";
-        
+       
         mk($idUsr,$nomUsr,$nomInsti);        
         echo"kml creado";
     }
