@@ -61,7 +61,7 @@
             </script>";                
         ?>
         
-         Día<br><input name="fecha" type="text" id="dateArrival" onClick="popUpCalendar(this, frmUsr.dateArrival, 'mm-dd-yyyy',minYear);" size="10" ><br><br>
+         Día (mm-dd-aaaa)<br><input name="fecha" type="text" id="dateArrival" onClick="popUpCalendar(this, frmUsr.dateArrival, 'dd-mm-yyyy',minYear);" size="10" ><br><br>
         <input type="submit" value="aceptar" align="center" /></form>
         
     </body>

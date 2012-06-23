@@ -64,7 +64,8 @@
             $pointNode->appendChild($coorNode);
         }
         $ruta = $dom->saveXML();
-        $kmlSave = $dom->save("/home/aiturbe/public_html/raymundo/files/ruta.kml");
+        //$kmlSave = $dom->save("/home/aiturbe/public_html/raymundo/files/ruta.kml");
+        $kmlSave = $dom->save("files/ruta.kml");
         //header('Content-type: application/vnd.google-earth.kml+xml');
         //header('Content-disposition: attachment; filename="myfilename.kml"');  
         //Para dar opcion de descargar KML desde explorador, quitar kmlSave

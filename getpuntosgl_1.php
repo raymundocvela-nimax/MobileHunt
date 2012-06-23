@@ -73,7 +73,7 @@
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
                 var map = new google.maps.Map(document.getElementById("map_canvas"), settings)
-               var rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/files/ruta.kml');
+               var rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/files/networklink.kml');
                //var rutaLayer = new google.maps.KmlLayer('/home/aiturbe/public_html/raymundo/files/ruta.kml');
                //var rutaLayer = new google.maps.KmlLayer('/ruta.kml');
                rutaLayer.setMap(map);
@@ -136,11 +136,17 @@
         $idUsr=$_REQUEST['usr'];
         $nomInsti=$_REQUEST['nomInsti'];
       
-        //$fecha=$_REQUEST('fecha');
-        $fechaExplode=explode("-",$fecha);
-        $fechaQuery=date("Y-m-d",mktime(0,0,0,$fechaExplode[1],$fechaExplode[0],$fechaExplode[2]));
-        //echo date("Y-m-d",$_REQUEST('fecha'));
-        echo $fechaQuery;
+        
+        
+        //recuperar fecha
+        $fechaExplode=explode('-',$_REQUEST['fecha']);
+        //$fechaQuery=date('Y-m-d',mktime(0,0,0,$fechaExplode[1],$fechaExplode[0],$fechaExplode[2]));
+        $fechaQuery=date('Y-m-d',mktime(0,0,0,$fechaExplode[1],$fechaExplode[0],$fechaExplode[2]));
+        echo $fechaQuery."<br>";
+        
+        //print_r $fechaQuery;
+        
+      
         
         //obtener nombre Usr segun id
         $result=mysql_query("SELECT usuario FROM usuarios WHERE idusuarios='".$idUsr."'") or die("error".mysql_error());
@@ -149,7 +155,7 @@
         
         
         //puntos segun idUsr
-        $result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."'") or die("error".mysql_error());
+        $result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND fecha='".$fechaQuery."'") or die("error".mysql_error());
         
         echo"Institucion/Compania:".$_REQUEST['nomInsti']."<br>";
         

@@ -1,1 +1,5 @@
 [18-Jun-2012 19:05:10] PHP Warning:  unlink(/home/aiturbe/public_html/raymundo/files/ruta.kml) [<a href='function.unlink'>function.unlink</a>]: No such file or directory in /home/aiturbe/public_html/raymundo/deletefile.php on line 3
+[21-Jun-2012 22:52:52] PHP Warning:  mktime() expects parameter 5 to be long, string given in /home/aiturbe/public_html/raymundo/getpuntosgl_1.php on line 141
+[22-Jun-2012 00:20:19] PHP Warning:  mktime() expects parameter 5 to be long, string given in /home/aiturbe/public_html/raymundo/getpuntosgl_1.php on line 141
+[22-Jun-2012 00:27:52] PHP Warning:  mktime() expects parameter 5 to be long, string given in /home/aiturbe/public_html/raymundo/getpuntosgl_1.php on line 141
+[22-Jun-2012 00:28:43] PHP Warning:  mktime() expects parameter 5 to be long, string given in /home/aiturbe/public_html/raymundo/getpuntosgl_1.php on line 141
