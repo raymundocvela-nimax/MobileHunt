@@ -73,9 +73,13 @@
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
                 var map = new google.maps.Map(document.getElementById("map_canvas"), settings)
+<<<<<<< HEAD
                var rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/files/networklink.kml');
+=======
+           //var rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/files/networklink.kml');
+>>>>>>> Fecha
                //var rutaLayer = new google.maps.KmlLayer('/home/aiturbe/public_html/raymundo/files/ruta.kml');
-               //var rutaLayer = new google.maps.KmlLayer('/ruta.kml');
+               var rutaLayer = new google.maps.KmlLayer('/ruta.kml');
                rutaLayer.setMap(map);
            }
           
@@ -141,7 +145,14 @@
         //recuperar fecha
         $fechaExplode=explode('-',$_REQUEST['fecha']);
         //$fechaQuery=date('Y-m-d',mktime(0,0,0,$fechaExplode[1],$fechaExplode[0],$fechaExplode[2]));
+<<<<<<< HEAD
         $fechaQuery=date('Y-m-d',mktime(0,0,0,$fechaExplode[1],$fechaExplode[0],$fechaExplode[2]));
+=======
+        
+        $fechaQuery=date('d-m-Y',mktime(0,0,0,$fechaExplode[1],$fechaExplode[0],$fechaExplode[2]));
+        
+        
+>>>>>>> Fecha
         echo $fechaQuery."<br>";
         
         //print_r $fechaQuery;
@@ -155,8 +166,14 @@
         
         
         //puntos segun idUsr
+<<<<<<< HEAD
         $result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND fecha='".$fechaQuery."'") or die("error".mysql_error());
         
+=======
+        //$result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND fecha='".$fechaQuery."'") or die("error".mysql_error());
+        $result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."'") or die("error".mysql_error());
+        //echo "consulta SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."')";
+>>>>>>> Fecha
         echo"Institucion/Compania:".$_REQUEST['nomInsti']."<br>";
         
         echo"Nombre de Usuario: $nomUsr <br>";
