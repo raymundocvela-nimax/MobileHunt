@@ -16,7 +16,13 @@
 //  OpenStreetMap (OSM): http://www.openstreetmap.org/
 //  OSM licence, Creative Commons: http://creativecommons.org/licenses/by-sa/2.0/legalcode
 
-function gob(e){if(typeof(e)=='object')return(e);if(document.getElementById)return(document.getElementById(e));return(eval(e))}
+function gob(e){
+    if(typeof(e)=='object')
+        return(e);
+    if(document.getElementById)
+        return(document.getElementById(e));
+    return(eval(e))
+}
 var map;
 var polyShape;
 var markerShape;
@@ -51,6 +57,8 @@ var markersArray = [];
 var addresssArray = [];
 var pointsArrayKml = [];
 var markersArrayKml = [];
+
+//herramient poligono seleccionada por defecto
 var toolID = 1;
 var codeID = 1;
 var shapeId = 0;
@@ -270,6 +278,7 @@ function activateMarker() {
     });
 }
 function initmap(){
+    
     geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(59.914063, 10.737874);//(45.0,7.0);//45.074723, 7.656433
     var mapTypeIds = [];
@@ -730,6 +739,10 @@ function setTool(){
         newstart();
     }else{
         if(toolID == 1){ // polyline
+
+toolID=2;
+
+/*
             // change to polyline draw mode not allowed
             if(outerArray.length > 0) { //indicates polygon with hole
                 toolID = 2;
@@ -773,6 +786,10 @@ function setTool(){
             preparePolyline(); //if a polygon exists, it will be redrawn as polylines
             if(codeID == 1) logCode1(); // KML
             if(codeID == 2) logCode4(); // Javascipt
+
+*/
+
+
         }
         if(toolID == 2){ // polygon
             if(rectangle) {
@@ -2661,18 +2678,28 @@ h1 {
 
 <div id="map_canvas"></div>
 <div id="header">
+    <!--
     <div id="title">
         <h1>Google Maps API v3 Tool</h1>
     </div>
+    -->
     <div class="choice">
         <form id="tools" style="float:left;text-align:right;padding:10px 0px 0px 10px;" action="./" method="post" onsubmit="return false">
-        <select id="toolchoice" name="toolchoice" style="border:1px solid #000000;" onchange="toolID=parseInt(this.options[this.selectedIndex].value);setTool();">
+        
+        <select id="toolchoice"  name="toolchoice"  style="border:1px solid #000000;" onchange="toolID=parseInt(this.options[this.selectedIndex].value);setTool();">
+
+
+<!--    No nos interesa esta opción
         <option selected="selected" value="1">Polyline</option>
+        -->
+        <option value="2">Figura</option>
         <option value="2">Polygon</option>
         <option value="3">Rectangle</option>
         <option value="4">Circle</option>
+<!--    No nos interesa esta opción
         <option value="5">Marker</option>
         <option value="6">Directions</option>
+        -->
         </select>
         </form>
     </div>
