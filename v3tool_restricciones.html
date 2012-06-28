@@ -322,14 +322,14 @@ function initmap(){
        mapSet(centerLat,centerLng,z);
     }
     
+    //configuramos mapa
     function mapSet(lat,lng,z){
         if (lat==0){
              lat=23.919722222222223;
              lng=-102.1625;
              z=6;
              //alert ('coor = 0');
-         }
-          
+        }
         geocoder = new google.maps.Geocoder();
         latlng = new google.maps.LatLng(lat, lng);
         var mapTypeIds = [];
