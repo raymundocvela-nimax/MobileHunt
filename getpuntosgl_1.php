@@ -19,7 +19,7 @@
 
     <!--Reloj-->
         <script type="text/javascript"><!--
-
+         var rutaKml=0;
         //se ponen <!-- por si el explorador no es compatibel con Javascript no salga impreso el codigo            
             function HoraActual(hora, minuto, segundo){
                 segundo = segundo + 1;
@@ -73,10 +73,9 @@
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
                 var map = new google.maps.Map(document.getElementById("map_canvas"), settings)
-                //var rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/files/networklink.kml');
-                //var rutaLayer = new google.maps.KmlLayer('/home/aiturbe/public_html/raymundo/files/ruta.kml');
-                var rutaLayer = new google.maps.KmlLayer('/ruta.kml');
+                var rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/'+rutaKml);
                 rutaLayer.setMap(map);
+                //window.open("https://maps.google.com/maps?q=http:%2F%2Figconsultores.net%2Fraymundo%2Ffiles%2F"+"1340900465.kml");
            }
           
             
@@ -184,17 +183,17 @@
             echo "</tr> ";
         }
         echo "</table> ";
-        echo "fintabla";
-       
-        mk($idUsr,$nomUsr,$nomInsti);        
-        echo"kml creado";
+        //echo "fintabla";
+        $rutaKml=mk($idUsr,$nomUsr,$nomInsti,$fechaQuery);
+        echo"kml creado: ".$rutaKml;
+        
+        //pasamos valor a variable de javascript para mostrar kml
+        echo '<script type="text/javascript">rutaKml="'.$rutaKml.'"</script>';
     }
-
-          
             
 ?>            
 
+</script>
     
 </body>
 </html>
-

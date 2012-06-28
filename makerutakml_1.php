@@ -1,14 +1,10 @@
 <?php
-    function mk($idUsr,$nomUsr,$nomInsti){
+    function mk($idUsr,$nomUsr,$nomInsti,$fechaQuery){
         include('conectar.php');
-        // Opens a connection to a MySQL server.
-
-        // Selects all the rows in the markers table.
-        $query = "SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios=$idUsr";
-        $result = mysql_query($query);
+        $query ="SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."'";
+        $result = mysql_query($query) or die("error".mysql_error());
         if (!$result)
             die('Invalid query: ' . mysql_error());
-
         // PHP5
         // Creates the Document.
         $dom = new DOMDocument('1.0', 'UTF-8');
@@ -24,7 +20,8 @@
         $restIconstyleNode = $dom->createElement('IconStyle');
         $restIconstyleNode->setAttribute('id', 'restaurantIcon');
         $restIconNode = $dom->createElement('Icon');
-        $restHref = $dom->createElement('href', '://maps.google.com/mapfiles/kml/pa4/icon62.png');
+        //icono adecuado 
+        $restHref = $dom->createElement('href', '://maps.google.com/mapfiles/kml/pal2/icon5.png');
         $restIconNode->appendChild($restHref);
         $restIconstyleNode->appendChild($restIconNode);
           
@@ -65,13 +62,17 @@
         }
         $ruta = $dom->saveXML();
         //$kmlSave = $dom->save("/home/aiturbe/public_html/raymundo/files/ruta.kml");
-        $kmlSave = $dom->save("files/ruta.kml");
+        //obtenemos timestamp para crear numero aleatorio de 
+        $t=time();
+        $rutaKml="files/".$t.".kml";
+        $kmlSave = $dom->save($rutaKml);
         //header('Content-type: application/vnd.google-earth.kml+xml');
         //header('Content-disposition: attachment; filename="myfilename.kml"');  
         //Para dar opcion de descargar KML desde explorador, quitar kmlSave
 
         //echo $ruta;
         echo $kmlSave;
+        return $rutaKml;
 
 
 
