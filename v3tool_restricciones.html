@@ -1,11 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name = "description" content = "Online tool to create code for polyline and polygon to Google Maps v3 (version 3)"/>
 <title>Tool for Google Maps v3 (version 3)</title>
-<head>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script type="text/javascript">
 //<![CDATA[
@@ -23,6 +23,8 @@ function gob(e){
         return(document.getElementById(e));
     return(eval(e))
 }
+var textKml;
+
 var map;
 var polyShape;
 var markerShape;
@@ -2468,6 +2470,13 @@ function circleintroduction() {
     'You may resize and move the circle with the two draggable markers you then have.\n\n'+
     'KML code is not available for Circle.';
 }
+
+
+function selectText(){
+    textKml=gob('coords1').value;
+}
+
+
 //]]>
 </script>
 
@@ -2795,8 +2804,7 @@ h1 {
     <div class="topbutton">
         <input type="button" onclick="deleteLastPoint();" value="Delete Last Point"/>
     </div>
-    <!--
-    <div class="topbutton">
+    <!--<div class="topbutton">
         <input type="button" onclick="styleprep();" value="Style Options"/>
     </div>
     
@@ -2818,6 +2826,11 @@ h1 {
         <input type="button" onclick="regret();" value="Regret deleted point" id="RegretButton"/>
     </div>
     -->
+    <div class="topbutton">
+        <input type="button" onclick="selectText()" value="Guardar Restricción"/>
+        
+    </div>
+    
     <form style="margin-right:5px" action="#" onsubmit="showAddress(this.address.value); return false">
     <input type="text" style="border: 1px solid #000000;" size="50" name="address" value="Distrito Federal México " />
     <input type="submit" value="Search" />

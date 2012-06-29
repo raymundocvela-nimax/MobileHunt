@@ -12,7 +12,7 @@
         function iniciar(){
 
           // Display the map, with some controls and set the initial location 
-          
+/*          
             var latlng = new google.maps.LatLng(19.461, -99.062); //Centro del Mapa
             var settings = {
                 zoom: 6,
@@ -25,13 +25,24 @@
             };
             var map = new google.maps.Map(document.getElementById("map"), settings);
           
-          
+ */         
             // create a polygon
             var pts = [
+ 
+new google.maps.LatLng(19.301403,-99.146976),
+new google.maps.LatLng(19.295489,-99.155216),
+new google.maps.LatLng(19.314930,-99.167575),
+new google.maps.LatLng(19.314120,-99.150409)
+/*
                 new google.maps.LatLng(19.461, -99.062), 
                 new google.maps.LatLng(19.471, -99.225), 
                 new google.maps.LatLng(19.270, -99.251), 
                 new google.maps.LatLng(19.275, -99.036)
+                */
+                
+                
+                
+                
             ];
             var poligono = new google.maps.Polygon({
             paths: pts,
@@ -41,9 +52,11 @@
             fillColor: "#FF0000",
             fillOpacity: 0.35 
             } );
-            poligono.setMap(map);
+//            poligono.setMap(map);
             
-            var punto=new google.maps.LatLng(34.0, -100.7);
+//var punto=new google.maps.LatLng(34.0, -100.7);
+//var punto=new google.maps.LatLng(19.306, -99.157);
+var punto=new google.maps.LatLng(19.316, -99.159);
             
             if (google.maps.geometry.poly.containsLocation(punto,poligono)) {
             //    if (poligono.containsLatLng(punto)) {
