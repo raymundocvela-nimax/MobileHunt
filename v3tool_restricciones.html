@@ -2474,6 +2474,7 @@ function circleintroduction() {
 
 function selectText(){
     textKml=gob('coords1').value;
+    
 }
 
 
@@ -2797,12 +2798,12 @@ h1 {
     
     
     <div class="topbutton">
-        <input type="button" onclick="clearMap();" value="Clear Map"/>
+        <input type="button" onclick="clearMap();" value="Borrar Mapa"/>
     </div>
     
     
     <div class="topbutton">
-        <input type="button" onclick="deleteLastPoint();" value="Delete Last Point"/>
+        <input type="button" onclick="deleteLastPoint();" value="Eliminar último vértice"/>
     </div>
     <!--<div class="topbutton">
         <input type="button" onclick="styleprep();" value="Style Options"/>
@@ -2826,10 +2827,7 @@ h1 {
         <input type="button" onclick="regret();" value="Regret deleted point" id="RegretButton"/>
     </div>
     -->
-    <div class="topbutton">
-        <input type="button" onclick="selectText()" value="Guardar Restricción"/>
-        
-    </div>
+
     
     <form style="margin-right:5px" action="#" onsubmit="showAddress(this.address.value); return false">
     <input type="text" style="border: 1px solid #000000;" size="50" name="address" value="Distrito Federal México " />
@@ -2844,26 +2842,27 @@ h1 {
         Step 0
     </div>
     <div>
-        <input id="multipleholes" type="button" onclick="nexthole();" value="Next hole"/>
+        <input id="multipleholes" type="button" onclick="nexthole();" value="Next hole" />
     </div>
 </div>
 <div id="presenter">
-    <form style="margin-bottom:5px" action="#">
+    <form name ="frmText" style="margin-bottom:5px" action="instrest.php" method="post">
     &nbsp;&nbsp;&nbsp;Live code presentation in textarea (below):
-    <input type="checkbox" name="showcodemode" id="presentcode" value="yes" onclick="showCodeintextarea();" checked="checked"/>
-<textarea id="coords1" cols="62" rows="24">
-Click on the map. The code for the shape you create will be presented here.
-You may shift from Polyline to Polygon and vice/versa at any time when you draw.
-When finished with a shape, click 'Next shape' and draw another shape, if you wish.
-If you want to draw polygon with hole(-s), choose Polygon and follow the instructions.
-Polyline and polygon may be edited by clicking 'Edit lines'.
-When editing, you may remove a point with a click on it.
-If you want to edit a saved polyline or polygon (including Rectangle), click on it. Then click 'Edit lines'.
-There are style options for everything you draw on the map.
-The complete KML code for what you have created, is always available with Show KML.
-Uncheck 'Live code presentation' for greater speed when you draw shapes with large amount of points.
-Check it when you want to see the code.
-</textarea>
+    <input type="checkbox" name="showcodemode" id="presentcode" value="yes" onclick="showCodeintextarea();" checked="checked" />
+    <textarea id="coords1" name="coords1" cols="62" rows="24">
+    Click on the map. The code for the shape you create will be presented here.
+    You may shift from Polyline to Polygon and vice/versa at any time when you draw.
+    When finished with a shape, click 'Next shape' and draw another shape, if you wish.
+    If you want to draw polygon with hole(-s), choose Polygon and follow the instructions.
+    Polyline and polygon may be edited by clicking 'Edit lines'.
+    When editing, you may remove a point with a click on it.
+    If you want to edit a saved polyline or polygon (including Rectangle), click on it. Then click 'Edit lines'.
+    There are style options for everything you draw on the map.
+    The complete KML code for what you have created, is always available with Show KML.
+    Uncheck 'Live code presentation' for greater speed when you draw shapes with large amount of points.
+    Check it when you want to see the code.
+    </textarea>
+    <input type="submit" value="Guardar Restricción" />
     </form>
 </div>
 <div id="polylineoptions">
