@@ -22,6 +22,7 @@
                 $cont++;
             }
             echo  ("<select name='ins' id='ins'>$option</select>");
+            mysqli_close();
         ?>
         <input type="submit" value="aceptar" align="center" />
         </form>

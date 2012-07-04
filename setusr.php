@@ -46,7 +46,7 @@
             //adecuar valor idIns
             $idInsti=$_REQUEST['ins']+1;
             $_SESSION["idInsti"]=$idInsti;
-            
+            echo $_SESSION['idInsti'];
             //obtener nombre Insti
             $result=mysql_query("SELECT nombre FROM institucion WHERE idinstitucion='".$idInsti."'") or die("error".mysql_error());
             $row=mysql_fetch_array($result);

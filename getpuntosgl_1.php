@@ -133,7 +133,7 @@
                     include('conectar.php');
                     $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$_SESSION['idUsr']."'";
                     echo $query;
-                    $result=mysql_query(query);
+                    $result=mysql_query($query);
                     if($row=mysql_fetch_array($result));
                     $js=$row[0];
                     echo "row[0]=".$js;
