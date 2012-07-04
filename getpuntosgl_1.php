@@ -134,19 +134,17 @@
                     $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$_SESSION['idUsr']."'";
                     echo $query;
                     $result=mysql_query(query);
-                    $row=mysql_fetch_array($result);
-                    //$js=$row[0];
-                    echo $row;
-                    if($js!="")
+                    if($row=mysql_fetch_array($result));
+                    $js=$row[0];
+                    echo "row[0]=".$js;
+
+/*                    if($js!="")
                     {
                         echo '<script type="text/javascript">
                         function verRestriccion(){'.$js.'
-                        }
-                        /* <![CDATA[ */
-                        /* ]]> */
-                        </script>';
+                        }';
                         echo '<button type="button" align="center"  onclick="verRestriccion()">Ver Restricción</button> ';                        
-                    }
+                    }*/
                  ?>
                 
                 <button type="button" align="center"  onclick="abrirPag('v3tool_restricciones.html')">Establecer Restricción</button> 
