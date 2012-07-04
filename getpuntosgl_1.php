@@ -1,3 +1,10 @@
+<?php
+    if (!isset($_SESSION)) {
+    session_start();
+    }
+    else echo "sesión iniciada";
+ ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html style="height:100%" xmlns="http://www.w3.org/1999/xhtml"> <!--style="height:100%" es para poder ocupar el porcentaje en el div del mapa, si no se pone el div q se genera es de altura � height 0-->
@@ -78,7 +85,11 @@
                 //window.open("https://maps.google.com/maps?q=http:%2F%2Figconsultores.net%2Fraymundo%2Ffiles%2F"+"1340900465.kml");
            }
           
-            
+ 
+            function abrirPag(url){
+                window.location.href = url; //abre la pagina en la misma ventana
+                //window.open(url,"","algun parametro que desees"); abre la pagina en nueva ventana
+            }
 
             function funciones(){//Juntamos las funciones en una sola, para poderlas ejecutar en el onload del body
 
@@ -112,9 +123,34 @@
                 <div class="usr" id="usr" style="overflow:auto">
                     div usr
                 </div>
+                <!-- verificamos si existe restricción guardada
+                -->
                 
                 
-                <button type="button" value="aceptar" align="center" onclick="loadkml()">Ver ruta </button>
+                
+                
+                <?php
+                    include('conectar.php');
+                    $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$_SESSION['idUsr']."'";
+                    echo $query;
+                    $result=mysql_query(query);
+                    $row=mysql_fetch_array($result);
+                    //$js=$row[0];
+                    echo $row;
+                    if($js!="")
+                    {
+                        echo '<script type="text/javascript">
+                        function verRestriccion(){'.$js.'
+                        }
+                        /* <![CDATA[ */
+                        /* ]]> */
+                        </script>';
+                        echo '<button type="button" align="center"  onclick="verRestriccion()">Ver Restricción</button> ';                        
+                    }
+                 ?>
+                
+                <button type="button" align="center"  onclick="abrirPag('v3tool_restricciones.html')">Establecer Restricción</button> 
+                <button type="button" align="center" onclick="loadkml()">Ver ruta </button>
                 <?php obtenerDatos();?>
                 
 
@@ -134,14 +170,13 @@
         //adecuar ID usr
         $idUsr=$_REQUEST['usr'];
         $nomInsti=$_REQUEST['nomInsti'];
-      
-        
+        $_SESSION['idUsr']=$idUsr;
         
         //recuperar fecha
         $fechaExplode=explode('-',$_REQUEST['fecha']);
         //$fechaQuery=date('Y-m-d',mktime(0,0,0,$fechaExplode[1],$fechaExplode[0],$fechaExplode[2]));
         $fechaQuery=date('d-m-Y',mktime(0,0,0,$fechaExplode[1],$fechaExplode[0],$fechaExplode[2]));
-        echo $fechaQuery."<br>";
+        //echo $fechaQuery."<br>";
         
         //print_r $fechaQuery;
         
@@ -150,7 +185,7 @@
         $result=mysql_query("SELECT usuario FROM usuarios WHERE idusuarios='".$idUsr."'") or die("error".mysql_error());
         $row=mysql_fetch_array($result);
         $nomUsr=$row[0];
-        
+        $_SESSION['nomUsr']=$nomUsr;
         
         //puntos segun idUsr
         /*consulta original
@@ -158,9 +193,9 @@
         */
         $result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."'") or die("error".mysql_error());
         //echo "consulta SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."')";
-        echo"Institucion/Compania:".$_REQUEST['nomInsti']."<br>";
-        
+        echo"Institucion/Compania:".$nomInsti."<br>";
         echo"Nombre de Usuario: $nomUsr <br>";
+        echo"Fecha:".$fechaQuery."<br>";
         //creamos tabla
         echo "<table border = '1'> ";
         //nombre filas
@@ -193,7 +228,6 @@
             
 ?>            
 
-</script>
     
 </body>
 </html>

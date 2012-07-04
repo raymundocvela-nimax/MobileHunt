@@ -1,9 +1,17 @@
+<?php
+    if (!isset($_SESSION)) {
+    session_start();
+    }
+    else echo "sesión iniciada";
+ ?>
 
-//2 setusr : 3 getpuntos
+ <!--iniciamos variables de sessión-->
+ //2 setusr : 3 getpuntos
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html style="height:100%" xmlns="http://www.w3.org/1999/xhtml"> <!--style="height:100%" es para poder ocupar el porcentaje en el div del mapa, si no se pone el div q se genera es de altura � height 0-->
     <head>
+
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
         <!-- Script para desplegar calendario-->
         <script language='javascript' src="/js/popcalendar.js"></script> 
@@ -14,6 +22,7 @@
         <form name="frmUsr" id="frmUsr" action="getpuntosgl_1.php" method="get">
         <center>
         <?php 
+            session_start();
             include('conectar.php');
             include('deletefile.php');
             $file='/home/aiturbe/public_html/raymundo/files/ruta.kml';
@@ -36,12 +45,13 @@
                      
             //adecuar valor idIns
             $idInsti=$_REQUEST['ins']+1;
+            $_SESSION["idInsti"]=$idInsti;
             
             //obtener nombre Insti
             $result=mysql_query("SELECT nombre FROM institucion WHERE idinstitucion='".$idInsti."'") or die("error".mysql_error());
             $row=mysql_fetch_array($result);
             $nomInsti=$row[0];
-            
+            $_SESSION["nomInsti"]=$nomInsti;
             
             //usuarios segun idinstitucion
             $result=mysql_query("SELECT idusuarios,usuario FROM usuarios WHERE institucion_idinstitucion='".$idInsti."'") or die("error".mysql_error());                                    
@@ -61,7 +71,7 @@
             </script>";                
         ?>
         
-         D�a (dd-mm-aaaa)<br><input name="fecha" type="text" id="dateArrival" onClick="popUpCalendar(this, frmUsr.dateArrival, 'dd-mm-yyyy',minYear);" size="10" ><br><br>
+         Día (dd-mm-aaaa)<br><input name="fecha" type="text" id="dateArrival" onClick="popUpCalendar(this, frmUsr.dateArrival, 'dd-mm-yyyy',minYear);" size="10" ><br><br>
         <input type="submit" value="aceptar" align="center" />
         </form>
         
