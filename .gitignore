@@ -3,7 +3,7 @@
 #################
 _gsdata_/
 conectar.php
-files/kml
+*.kml
 
 #################
 ## Eclipse
