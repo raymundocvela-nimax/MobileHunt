@@ -146,6 +146,7 @@
         </div>        
         <div class="menu">
 			<div class="encabezadoMenu"><h1>Panel de Administración</h1>
+                <a href="index.php">Principal</a>
             	<div class="fechaMenu"><?php $fecha=date("d/m/y"/*." "."h:i:s"*/); echo $fecha;?> </div><!--fecha-->
                 <div class="relojMenu" id="relojMenu"></div>
             </div>
@@ -163,13 +164,16 @@
                 
                 <?php
                     include('conectar.php');
+                    $idUsr=$_REQUEST['usr'];
+                    $_SESSION['idUsr']=$idUsr;
                     $hayRestriccion;
                     $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$_SESSION['idUsr']."'";
                     echo "<br>".$query;
                     $result=mysql_query($query);
-                    if($row=mysql_fetch_array($result)){
-                        $js=$row[0];    
-                        echo "restricción leida";
+                    $row=mysql_fetch_array($result);
+                    if($row[0]!=null){
+                        $js=$row[0];
+                        echo "<br>restricción leida";
                         echo '<script type="text/javascript">'.$js.'</script>';                    
                         echo '<button type="button" onclick="showRestriccion()" >Mostrar Restricción</button>';
                         echo '<script type="text/javascript">hayRestriccion=1;</script>';                    
@@ -181,7 +185,9 @@
                  ?>
 
                  
-                <button type="button" align="center"  onclick="abrirPag('v3tool_restricciones.html')">Establecer Restricción</button> 
+                <button type="button" align="center"  onclick="abrirPag('v3tool_restricciones.html')">
+                    Establecer Restricción
+                </button> 
                 <button type="button" align="center" onclick="loadkml()">Ver ruta </button>
                 <?php obtenerDatos();?>
                 
@@ -200,9 +206,9 @@
         include('makerutakml_1.php');
                     
         //adecuar ID usr
-        $idUsr=$_REQUEST['usr'];
+        
         $nomInsti=$_SESSION['nomInsti'];
-        $_SESSION['idUsr']=$idUsr;
+        //$_SESSION['idUsr']=$idUsr;
         
         //recuperar fecha
         $fechaExplode=explode('-',$_REQUEST['fecha']);
@@ -214,19 +220,14 @@
         
       
         //obtener nombre Usr segun id
-        $result=mysql_query("SELECT usuario FROM usuarios WHERE idusuarios='".$idUsr."'") or die("error".mysql_error());
+        $result=mysql_query("SELECT usuario FROM usuarios WHERE idusuarios='".$_SESSION['idUsr']."'") or die("error".mysql_error());
         $row=mysql_fetch_array($result);
         $nomUsr=$row[0];
         $_SESSION['nomUsr']=$nomUsr;
         
-        //puntos segun idUsr
-        /*consulta original
-        $result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND fecha='".$fechaQuery."'") or die("error".mysql_error());
-        */
-        $query=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."'") or die("error".mysql_error());
-        //echo "consulta SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."')";
+
         echo"Institucion/Compania:".$_SESSION['idInsti']."- $nomInsti <br>";
-        echo"Nombre de Usuario: $idUsr - $nomUsr <br>";
+        echo"Nombre de Usuario: ".$_SESSION['idUsr']." - $nomUsr <br>";
         echo"Fecha:".$fechaQuery."<br>";
         //creamos tabla
         echo "<table border = '1'> ";
@@ -238,8 +239,14 @@
         echo "<td><b>Fecha y hora</b></td> ";
         echo "<td><b>Provedor de localización</b></td> ";
         echo "</tr> ";
-        
-        if(mysql_fetch_array($query)!=null){
+        //puntos segun idUsr
+        /*consulta original
+        $result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND fecha='".$fechaQuery."'") or die("error".mysql_error());
+        */
+        $query=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$_SESSION['idUsr']."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."'") or die("error".mysql_error());
+        //echo "consulta SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."')";        
+        $row=mysql_fetch_array($query);
+        if($row[0]!=null){
             //datos      
             while ($row=mysql_fetch_array($query)){
                 echo "<tr> ";
