@@ -2269,8 +2269,10 @@ function logCode4(){
         +'strokeWeight: '+polylinestyles[lcur].width+'\n'
         +'}\n';
         gob('coords1').value += options;
+        /*
         gob('coords1').value +='var it = new google.maps.Polyline(polyOptions);\n'
         +'it.setMap(map);\n';
+        */
         placemarks[plmcur].poly = "pl";
     }
     if(toolID == 2){
@@ -2284,8 +2286,10 @@ function logCode4(){
         +'fillOpacity: '+polygonstyles[pcur].fillopac+'\n'
         +'}\n';
         gob('coords1').value += options;
+        /*
         gob('coords1').value +='var it = new google.maps.Polygon(polyOptions);\n'
         +'it.setMap(map);\n';
+        */
         placemarks[plmcur].poly = "pg";
     }
     javacode = gob('coords1').value;
@@ -2325,9 +2329,11 @@ function logCode5() {
     +'strokeWeight: '+polygonstyles[pcur].width+',\n'
     +'fillColor: "'+polygonstyles[pcur].fill+'",\n'
     +'fillOpacity: '+polygonstyles[pcur].fillopac+'\n'
-    +'};\n'
+    +'};\n';
+    /*
     +'var it = new google.maps.Polygon(polyOptions);\n'
     +'it.setMap(map);\n';
+    */
     placemarks[plmcur].poly = "pgh";
     javacode = gob('coords1').value;
 }
@@ -2363,8 +2369,10 @@ function logCode6() {
         +'strokeWeight: '+polygonstyles[pcur].width+'\n'
         +'}\n';
         gob('coords1').value += options;
+        /*
         gob('coords1').value +='var it = new google.maps.Polyline(polyOptions);\n'
         +'it.setMap(map);\n';
+        */
         javacode = gob('coords1').value;
     }
     if(codeID == 1) { // kml

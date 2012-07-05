@@ -10,7 +10,7 @@
     if($js!=""){
         $query="UPDATE usuarios SET restriccion='".$js."' WHERE idusuarios ='".$_SESSION['idUsr']."'";
         $result=mysql_query($query) or die ("error".mysql_error());
-        if($result!=1)
+        if($result=1)
             echo "Restricción agregada correctamente";
         else echo "Error al agregar restricción ".$result;
     }

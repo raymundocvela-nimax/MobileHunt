@@ -27,6 +27,7 @@
     <!--Reloj-->
         <script type="text/javascript"><!--
          var rutaKml=0;
+         var map;
         //se ponen <!-- por si el explorador no es compatibel con Javascript no salga impreso el codigo            
             function HoraActual(hora, minuto, segundo){
                 segundo = segundo + 1;
@@ -64,11 +65,35 @@
                     navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
-                var map = new google.maps.Map(document.getElementById("map_canvas"), settings);
+                map = new google.maps.Map(document.getElementById("map_canvas"), settings);
             }
            
            
            function loadkml(){
+               /* 
+               var latlng = new google.maps.LatLng(23.919722222222223, -102.1625); //Centro del Mapa
+                var settings = {
+                    zoom: 6,
+                    center: latlng,
+                    mapTypeControl: true,
+                    mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+                    navigationControl: true,
+                    navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var map = new google.maps.Map(document.getElementById("map_canvas"), settings)*/
+                var rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/'+rutaKml);
+                rutaLayer.setMap(map);
+                //window.open("https://maps.google.com/maps?q=http:%2F%2Figconsultores.net%2Fraymundo%2Ffiles%2F"+"1340900465.kml");
+           }
+          
+ 
+            function abrirPag(url){
+                window.location.href = url; //abre la pagina en la misma ventana
+                //window.open(url,"","algun parametro que desees"); abre la pagina en nueva ventana
+            }
+            
+            function showRestriccion(){
                 var latlng = new google.maps.LatLng(23.919722222222223, -102.1625); //Centro del Mapa
                 var settings = {
                     zoom: 6,
@@ -80,16 +105,10 @@
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
                 var map = new google.maps.Map(document.getElementById("map_canvas"), settings)
-                var rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/'+rutaKml);
-                rutaLayer.setMap(map);
-                //window.open("https://maps.google.com/maps?q=http:%2F%2Figconsultores.net%2Fraymundo%2Ffiles%2F"+"1340900465.kml");
-           }
-          
- 
-            function abrirPag(url){
-                window.location.href = url; //abre la pagina en la misma ventana
-                //window.open(url,"","algun parametro que desees"); abre la pagina en nueva ventana
+                var it = new google.maps.Polygon(polyOptions);
+                it.setMap(map);
             }
+            
 
             function funciones(){//Juntamos las funciones en una sola, para poderlas ejecutar en el onload del body
 
@@ -126,9 +145,6 @@
                 <!-- verificamos si existe restricción guardada
                 -->
                 
-                
-                
-                
                 <?php
                     include('conectar.php');
                     $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$_SESSION['idUsr']."'";
@@ -137,7 +153,8 @@
                     if($row=mysql_fetch_array($result));
                     $js=$row[0];
                     echo "row[0]=".$js;
-
+                    echo '<script type="text/javascript">'.$js.'</script>';                    
+                    echo '<button type="button" onclick="showRestriccion()" >Mostrar Restricción</button>';
 /*                    if($js!="")
                     {
                         echo '<script type="text/javascript">
@@ -146,7 +163,8 @@
                         echo '<button type="button" align="center"  onclick="verRestriccion()">Ver Restricción</button> ';                        
                     }*/
                  ?>
-                
+
+                 
                 <button type="button" align="center"  onclick="abrirPag('v3tool_restricciones.html')">Establecer Restricción</button> 
                 <button type="button" align="center" onclick="loadkml()">Ver ruta </button>
                 <?php obtenerDatos();?>

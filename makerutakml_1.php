@@ -65,13 +65,19 @@
         //obtenemos timestamp para crear numero aleatorio de 
         $t=time();
         $rutaKml="files/".$t.".kml";
-        $kmlSave = $dom->save($rutaKml);
+//        $kmlSave = $dom->save($rutaKml);
+        if($dom->save($rutaKml))
+        echo "Kml creado correctamente";
+        else echo "no se creo kml";
+        
         //header('Content-type: application/vnd.google-earth.kml+xml');
         //header('Content-disposition: attachment; filename="myfilename.kml"');  
         //Para dar opcion de descargar KML desde explorador, quitar kmlSave
 
         //echo $ruta;
-        echo $kmlSave;
+        
+        
+        //echo $kmlSave;
         return $rutaKml;
 
 
