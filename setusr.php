@@ -40,7 +40,8 @@
             $query=mysql_query("SELECT MAX(YEAR(fecha)) FROM puntos ") or die("error".mysql_error());
             $rowYear=mysql_fetch_array($query);
             $minYear=$rowYear[0];
-            echo"año min $minYear <br>";
+            echo'<a href="javascript:history.go(-1)">&lt&ltatrás</a>';
+            echo"<br>año min $minYear <br>";
             
                      
             //adecuar valor idIns
