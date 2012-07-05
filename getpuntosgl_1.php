@@ -27,7 +27,11 @@
     <!--Reloj-->
         <script type="text/javascript"><!--
          var rutaKml=0;
+         var rutaLayer;
+         var it;//poligono
          var map;
+         var hayRestriccion;
+         var existLoc;
         //se ponen <!-- por si el explorador no es compatibel con Javascript no salga impreso el codigo            
             function HoraActual(hora, minuto, segundo){
                 segundo = segundo + 1;
@@ -82,18 +86,26 @@
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
                 var map = new google.maps.Map(document.getElementById("map_canvas"), settings)*/
-                var rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/'+rutaKml);
-                rutaLayer.setMap(map);
+                if(existLoc==1)
+                {
+                    rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/'+rutaKml);
+                    rutaLayer.setMap(map);
                 //window.open("https://maps.google.com/maps?q=http:%2F%2Figconsultores.net%2Fraymundo%2Ffiles%2F"+"1340900465.kml");
+                }
+                else alert("No hay Datos");
+                
            }
           
  
             function abrirPag(url){
+                mensaje=confirm("Ya existe una restricción, ¿deseas eliminarla y agregar una nueva?");
+                if (mensaje)
                 window.location.href = url; //abre la pagina en la misma ventana
                 //window.open(url,"","algun parametro que desees"); abre la pagina en nueva ventana
             }
             
             function showRestriccion(){
+                /*
                 var latlng = new google.maps.LatLng(23.919722222222223, -102.1625); //Centro del Mapa
                 var settings = {
                     zoom: 6,
@@ -105,7 +117,8 @@
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
                 var map = new google.maps.Map(document.getElementById("map_canvas"), settings)
-                var it = new google.maps.Polygon(polyOptions);
+                */
+                it = new google.maps.Polygon(polyOptions);
                 it.setMap(map);
             }
             
@@ -139,29 +152,32 @@
 
             <div class="formulario" id="formulario" style="overflow:auto">
             	div form
+ <!--
                 <div class="usr" id="usr" style="overflow:auto">
                     div usr
                 </div>
+                -->
+                
                 <!-- verificamos si existe restricción guardada
                 -->
                 
                 <?php
                     include('conectar.php');
+                    $hayRestriccion;
                     $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$_SESSION['idUsr']."'";
-                    echo $query;
+                    echo "<br>".$query;
                     $result=mysql_query($query);
-                    if($row=mysql_fetch_array($result));
-                    $js=$row[0];
-                    echo "row[0]=".$js;
-                    echo '<script type="text/javascript">'.$js.'</script>';                    
-                    echo '<button type="button" onclick="showRestriccion()" >Mostrar Restricción</button>';
-/*                    if($js!="")
-                    {
-                        echo '<script type="text/javascript">
-                        function verRestriccion(){'.$js.'
-                        }';
-                        echo '<button type="button" align="center"  onclick="verRestriccion()">Ver Restricción</button> ';                        
-                    }*/
+                    if($row=mysql_fetch_array($result)){
+                        $js=$row[0];    
+                        echo "restricción leida";
+                        echo '<script type="text/javascript">'.$js.'</script>';                    
+                        echo '<button type="button" onclick="showRestriccion()" >Mostrar Restricción</button>';
+                        echo '<script type="text/javascript">hayRestriccion=1;</script>';                    
+                    }
+                    else{
+                      echo "<br>Usuario No tiene restricción";
+                      echo '<script type="text/javascript">hayRestriccion=0;</script>';                    
+                    } 
                  ?>
 
                  
@@ -185,7 +201,7 @@
                     
         //adecuar ID usr
         $idUsr=$_REQUEST['usr'];
-        $nomInsti=$_REQUEST['nomInsti'];
+        $nomInsti=$_SESSION['nomInsti'];
         $_SESSION['idUsr']=$idUsr;
         
         //recuperar fecha
@@ -207,10 +223,10 @@
         /*consulta original
         $result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND fecha='".$fechaQuery."'") or die("error".mysql_error());
         */
-        $result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."'") or die("error".mysql_error());
+        $query=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."'") or die("error".mysql_error());
         //echo "consulta SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."')";
-        echo"Institucion/Compania:".$nomInsti."<br>";
-        echo"Nombre de Usuario: $nomUsr <br>";
+        echo"Institucion/Compania:".$_SESSION['idInsti']."- $nomInsti <br>";
+        echo"Nombre de Usuario: $idUsr - $nomUsr <br>";
         echo"Fecha:".$fechaQuery."<br>";
         //creamos tabla
         echo "<table border = '1'> ";
@@ -222,24 +238,29 @@
         echo "<td><b>Fecha y hora</b></td> ";
         echo "<td><b>Provedor de localización</b></td> ";
         echo "</tr> ";
-      
-        //datos      
-        while ($row=mysql_fetch_array($result)){
-            echo "<tr> ";
-            echo "<td>$row[0]</td> ";
-            echo "<td>$row[1]</td> ";
-            echo "<td>$row[2]</td> ";
-            echo "<td>$row[3]</td> ";
-            echo "<td>$row[4]</td> ";
-            echo "</tr> ";
-        }
-        echo "</table> ";
-        //echo "fintabla";
-        $rutaKml=mk($idUsr,$nomUsr,$nomInsti,$fechaQuery);
-        echo"kml creado: ".$rutaKml;
         
-        //pasamos valor a variable de javascript para mostrar kml
-        echo '<script type="text/javascript">rutaKml="'.$rutaKml.'"</script>';
+        if(mysql_fetch_array($query)!=null){
+            //datos      
+            while ($row=mysql_fetch_array($query)){
+                echo "<tr> ";
+                echo "<td>$row[0]</td> ";
+                echo "<td>$row[1]</td> ";
+                echo "<td>$row[2]</td> ";
+                echo "<td>$row[3]</td> ";
+                echo "<td>$row[4]</td> ";
+                echo "</tr> ";
+            }
+            echo "</table> ";
+            //echo "fintabla";
+            $rutaKml=mk($idUsr,$nomUsr,$nomInsti,$fechaQuery);
+            echo"<br>kml creado: ".$rutaKml;
+            
+            //pasamos valor a variable de javascript para mostrar kml
+            echo '<script type="text/javascript">rutaKml="'.$rutaKml.'"</script>';    
+            echo '<script type="text/javascript">existLoc=1;</script>';  
+        }
+        else echo '<script type="text/javascript">existLoc=0;</script>';  
+        
     }
             
 ?>            
