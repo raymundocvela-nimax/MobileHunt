@@ -27,13 +27,13 @@
                 //Si hay restriccion de área?
                 $js=$row[0];
                 echo "<br>restricción: ".$js."--";
-                $laty=$_REQUEST['laty'];
-                $lonx=$_REQUEST['lonx'];
+                $laty=$_REQUEST['laty'];//longitud
+                $lonx=$_REQUEST['lonx'];//latitud
                 //Crea el poligono
                 echo '
                 <script type="text/javascript">
                 var inOut="out";
-                var punto= new google.maps.LatLng('.$laty.','.$lonx.');
+                var punto= new google.maps.LatLng('.$lonx.','.$laty.');
                 '.$js.';
                 var polyRest = new google.maps.Polygon(polyOptions);
                 if (google.maps.geometry.poly.containsLocation(punto,polyRest))
@@ -53,6 +53,8 @@
             //$phpdate=date("Y-m-d H:i:s",($_REQUEST['timestamp']));
             $phpdate=date("Y-m-d H:i:s");
             //$query="INSERT INTO puntos (usuarios_idUsuarios, longitud, latitud, fecha, provider) VALUES ('".$idUsr[0]."','".$_REQUEST['lonx']."','".$_REQUEST['laty']."','".$_REQUEST['timeStamp']."','".$_REQUEST['bestprov']."')";
+            
+            //los valores de Laty y Lonx estan alreves en la db
             $query="INSERT INTO puntos (usuarios_idUsuarios, longitud, latitud, fecha, provider) VALUES ('".$idUsr[0]."','".$_REQUEST['lonx']."','".$_REQUEST['laty']."','".$phpdate."','".$_REQUEST['bestprov']."')";
             $insert=mysql_query($query);
             if(!$insert){

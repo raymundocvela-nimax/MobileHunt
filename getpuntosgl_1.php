@@ -209,8 +209,8 @@
             //nombre filas
             echo "<tr> ";
             echo "<td><b>ID</b></td> ";
-            echo "<td><b>Longitud (x)</b></td> ";
             echo "<td><b>Latitud (y)</b></td> ";
+            echo "<td><b>Longitud (x)</b></td> ";
             echo "<td><b>Fecha y hora</b></td> ";
             echo "<td><b>Provedor de localización</b></td> ";
             echo "</tr> ";
