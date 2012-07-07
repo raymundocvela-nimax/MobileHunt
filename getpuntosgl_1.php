@@ -89,9 +89,10 @@
             }
           
             function abrirPag(url){
-                mensaje=confirm("Ya existe una restricción, ¿deseas eliminarla y agregar una nueva?");
+                if(hayRestriccion==1)
+                    mensaje=confirm("Ya existe una restricción, ¿deseas eliminarla y agregar una nueva?");
                 if (mensaje)
-                window.location.href = url; //abre la pagina en la misma ventana
+                    window.location.href = url; //abre la pagina en la misma ventana
                 //window.open(url,"","algun parametro que desees"); abre la pagina en nueva ventana
             }
             
