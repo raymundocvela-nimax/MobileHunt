@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
         <!-- Script para desplegar calendario-->
-        <script language='javascript' src="/js/popcalendar.js">        </script> 
+        <script type="text/javascript" src="/js/popcalendar.js">        </script> 
         <script type="text/javascript">
             function validar(){
                 fecha=document.frmUsr.fecha.value

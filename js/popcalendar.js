@@ -489,7 +489,8 @@
         function popUpCalendar(ctl,    ctl2, format, year) {
         minYear=year
         //ARREGLAR
-		var	leftpos=-190
+		//var	leftpos=-190
+        var    leftpos=90
 		var	toppos=-10
 
 		if (bPageLoaded)
