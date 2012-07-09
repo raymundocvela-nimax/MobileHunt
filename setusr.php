@@ -11,11 +11,13 @@
             function validar(){
                 fecha=document.frmUsr.fecha.value
                 if(fecha!="" && fecha.length==10 && fecha.charAt(2)=='-' && fecha.charAt(5)=='-'){
-                    return true  
+                    return true;  
                 } 
                 else{
                     alert("Debes ingresar una fecha con el formato dd-mm-aaaa (ejemplo: 07-07-2012)-"+fecha.charAt(3)+"-"+fecha.charAt(6) )
-                    return false
+                    //document.frmUsr.fecha.backgroundColor("CCFFCC")
+                    document.frmUsr.fecha.focus()
+                    return false;
                 }
             }
         </script>
@@ -25,7 +27,6 @@
         <form name="frmUsr" id="frmUsr" action="getpuntosgl_1.php" onsubmit="return validar()" method="get">
             <center>
             <?php 
-                session_start();
                 include('conectar.php');
                 include('deletefile.php');
                 $file='/home/aiturbe/public_html/raymundo/files/ruta.kml';
@@ -59,7 +60,8 @@
                 echo 
                 "<script languaje='JavaScript'>
                 var minYear='".$minYear."';
-                </script>";                
+                </script>";
+                mysql_close($con);                
             ?>
             Día (dd-mm-aaaa)<br><input name="fecha" type="text" id="dateArrival" onClick="popUpCalendar(this, frmUsr.dateArrival, 'dd-mm-yyyy',minYear);" size="10" ><br><br>
             <input type="submit" value="aceptar" align="center" />

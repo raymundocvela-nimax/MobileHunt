@@ -91,8 +91,7 @@
             function abrirPag(url){
                 if(hayRestriccion==1)
                     mensaje=confirm("Ya existe una restricción, ¿deseas eliminarla y agregar una nueva?");
-                if (mensaje)
-                    window.location.href = url; //abre la pagina en la misma ventana
+                else window.location.href = url; //abre la pagina en la misma ventana
                 //window.open(url,"","algun parametro que desees"); abre la pagina en nueva ventana
             }
             
@@ -202,8 +201,8 @@
         */
         $query=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$_SESSION['idUsr']."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."'") or die("error".mysql_error());
         //echo "consulta SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."')";        
-        $row=mysql_fetch_array($query);
-        if($row[0]!=null){            
+        $numRow=mysql_num_rows($query);
+        if($numRow!=0){            
             //creamos tabla
             echo "<table border = '1'> ";
             //nombre filas
@@ -241,7 +240,7 @@
         else{
             echo '<script type="text/javascript">existLoc=0;</script>';       
             echo '<b><br>No existen localizaciones asociadas a esta fecha:</b>'.$fechaQuery;
-        }         
+        }        
     }            
 ?>            
 </body>

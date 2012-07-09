@@ -3,8 +3,8 @@
         include('conectar.php');
         $query ="SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."'";
         $result= mysql_query($query) or die("error".mysql_error());
-        $row=mysql_fetch_array($result);
-        if ($row[0]!=null){
+        $numRow=mysql_num_rows($result);
+        if ($numRow!=0){
             // PHP5
             // Creates the Document.
             $dom = new DOMDocument('1.0', 'UTF-8');
