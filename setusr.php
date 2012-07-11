@@ -5,20 +5,25 @@
 <html style="height:100%" xmlns="http://www.w3.org/1999/xhtml"> <!--style="height:100%" es para poder ocupar el porcentaje en el div del mapa, si no se pone el div q se genera es de altura � height 0-->
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+        <!--Calendario-->
+        <link rel="stylesheet" href="build/kalendae.css" type="text/css" charset="utf-8">
+        <script src="build/kalendae.js" type="text/javascript" charset="utf-8"></script>
         <!-- Script para desplegar calendario-->
         <script type="text/javascript" src="/js/popcalendar.js">        </script> 
         <script type="text/javascript">
+
+                    
             function validar(){
                 fecha=document.frmUsr.fecha.value
                 if(fecha!="" && fecha.length==10 && fecha.charAt(2)=='-' && fecha.charAt(5)=='-'){
-                    return true;  
-                } 
-                else{
-                    alert("Debes ingresar una fecha con el formato dd-mm-aaaa (ejemplo: 07-07-2012)-"+fecha.charAt(3)+"-"+fecha.charAt(6) )
-                    //document.frmUsr.fecha.backgroundColor("CCFFCC")
-                    document.frmUsr.fecha.focus()
-                    return false;
-                }
+                return true;  
+            } 
+            else{
+                alert("Debes ingresar una fecha con el formato dd-mm-aaaa (ejemplo: 07-07-2012)-"+fecha.charAt(3)+"-"+fecha.charAt(6) )
+                //document.frmUsr.fecha.backgroundColor("CCFFCC")
+                document.frmUsr.fecha.focus()
+                return false;
+            }
             }
         </script>
         <title> Mobile Hunt - Proyecto Terminal Ingeniería en Computación UAM Azcapotzalco</title>
@@ -63,7 +68,11 @@
                 </script>";
                 mysql_close($con);                
             ?>
-            Día (dd-mm-aaaa)<br><input name="fecha" type="text" id="dateArrival" onClick="popUpCalendar(this, frmUsr.dateArrival, 'dd-mm-yyyy',minYear);" size="10" ><br><br>
+            Día (dd-mm-aaaa)<br>
+            <input type="text" name="fecha" id="dateArrival" class="auto-kal" data-kal="format:'DD-MM-YYYY', weekStart:'1', selected:Kalendae.moment()" size="10"><br><br>
+            <!--
+            <input name="fecha" type="text" id="dateArrival" onClick="popUpCalendar(this, frmUsr.dateArrival, 'dd-mm-yyyy',minYear);" size="10" ><br><br>
+            -->
             <input type="submit" value="aceptar" align="center" />
         </form>
     </body>
