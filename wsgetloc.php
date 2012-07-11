@@ -33,7 +33,7 @@
                 echo '
                 <script type="text/javascript">
                 var inOut="out";
-                var punto= new google.maps.LatLng('.$lonx.','.$laty.');
+                var punto= new google.maps.LatLng('.$laty.','.$lonx.');
                 '.$js.';
                 var polyRest = new google.maps.Polygon(polyOptions);
                 if (google.maps.geometry.poly.containsLocation(punto,polyRest))
@@ -55,7 +55,7 @@
             //$query="INSERT INTO puntos (usuarios_idUsuarios, longitud, latitud, fecha, provider) VALUES ('".$idUsr[0]."','".$_REQUEST['lonx']."','".$_REQUEST['laty']."','".$_REQUEST['timeStamp']."','".$_REQUEST['bestprov']."')";
             
             //los valores de Laty y Lonx estan alreves en la db
-            $query="INSERT INTO puntos (usuarios_idUsuarios, longitud, latitud, fecha, provider) VALUES ('".$idUsr[0]."','".$_REQUEST['lonx']."','".$_REQUEST['laty']."','".$phpdate."','".$_REQUEST['bestprov']."')";
+            $query="INSERT INTO puntos (usuarios_idUsuarios, latitud, longitud, fecha, provider) VALUES ('".$idUsr[0]."','".$_REQUEST['laty']."','".$_REQUEST['lonx']."','".$phpdate."','".$_REQUEST['bestprov']."')";
             $insert=mysql_query($query);
             if(!$insert){
                 $responsePhp="_0|".$inOut;

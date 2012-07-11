@@ -1,7 +1,7 @@
 <?php
     function mk($idUsr,$nomUsr,$nomInsti,$fechaQuery){
         include('conectar.php');
-        $query ="SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."'";
+        $query ="SELECT idpuntos,latitud,longitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."'";
         $result= mysql_query($query) or die("error".mysql_error());
         $numRow=mysql_num_rows($result);
         if ($numRow!=0){
@@ -47,7 +47,7 @@
                 // Create name, and description elements and assigns them the values of the name and address columns from the results.
                 $nameNode = $dom->createElement('name',htmlentities("Institucion/Compania: $nomInsti"));
                 $placeNode->appendChild($nameNode);
-                $descNode = $dom->createElement('description', "Usuario: $nomUsr\nLat: ".$row[2]."\nLong: ".$row[1]."\n".$row[3]."\n".$row[4]);
+                $descNode = $dom->createElement('description', "Usuario: $nomUsr\nLat: ".$row[1]."\nLong: ".$row[2]."\n".$row[3]."\n".$row[4]);
                 $placeNode->appendChild($descNode);
                 $styleUrl = $dom->createElement('styleUrl', '#restaurantStyle');
                 $placeNode->appendChild($styleUrl);
@@ -56,7 +56,7 @@
                 $placeNode->appendChild($pointNode);
                 // Creates a coordinates element and gives it the value of the lng and lat columns from the results.
                 //Latitud (y)  , longitud (x)
-                $coorStr = $row[2] . ',' . $row[1];
+                $coorStr = $row[1] . ',' . $row[2];
                 $coorNode = $dom->createElement('coordinates', $coorStr);
                 $pointNode->appendChild($coorNode);
             }
