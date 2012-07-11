@@ -56,7 +56,7 @@
                 $placeNode->appendChild($pointNode);
                 // Creates a coordinates element and gives it the value of the lng and lat columns from the results.
                 //Latitud (y)  , longitud (x)
-                $coorStr = $row[1] . ',' . $row[2];
+                $coorStr = $row[2] . ',' . $row[1];
                 $coorNode = $dom->createElement('coordinates', $coorStr);
                 $pointNode->appendChild($coorNode);
             }
