@@ -2,11 +2,9 @@
     if (!isset($_SESSION))session_start();
     else echo "sesión iniciada";
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html style="height:100%" xmlns="http://www.w3.org/1999/xhtml"> <!--style="height:100%" es para poder ocupar el porcentaje en el div del mapa, si no se pone el div q se genera es de altura � height 0-->
+<!DOCTYPE html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <meta charset="utf-8" />
     <title> Hunt GPS - Proyecto Terminal Ingeniería en Computación UAM Azcapotzalco</title>
 
     <!-- API Google MAPS muestra configuración Mapa-->
@@ -91,7 +89,7 @@
             function abrirPag(url){
                 if(hayRestriccion==1)
                     mensaje=confirm("Ya existe una restricción, ¿deseas eliminarla y agregar una nueva?");
-                else window.location.href = url; //abre la pagina en la misma ventana
+                if(mensaje) window.location.href = url; //abre la pagina en la misma ventana
                 //window.open(url,"","algun parametro que desees"); abre la pagina en nueva ventana
             }
             
@@ -112,6 +110,12 @@
                 it = new google.maps.Polygon(polyOptions);
                 it.setMap(map);
             }
+            
+            function chkShow(){
+
+                alert(document.getElementsByName(chkRes).value)
+            }
+            
             
             function funciones(){//Juntamos las funciones en una sola, para poderlas ejecutar en el onload del body
                 initialize();
@@ -136,6 +140,7 @@
             </div>
 
             <div class="formulario" id="formulario" style="overflow:auto">
+<input type="checkbox" name="chkboxRes" onclick="chkShow()" >Mostrar Restricción</input>'; 
  <!--           div form
                 <div class="usr" id="usr" style="overflow:auto">
                     div usr

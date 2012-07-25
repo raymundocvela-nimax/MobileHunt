@@ -69,7 +69,7 @@
                 mysql_close($con);                
             ?>
             Día (dd-mm-aaaa)<br>
-            <input type="text" name="fecha" id="dateArrival" class="auto-kal" data-kal="format:'DD-MM-YYYY', weekStart:'1', selected:Kalendae.moment()" size="10"><br><br>
+            <input type="text" required="required" name="fecha" id="dateArrival" class="auto-kal" data-kal="format:'DD-MM-YYYY', weekStart:'1', selected:Kalendae.moment()" size="10"><br><br>
             <!--
             <input name="fecha" type="text" id="dateArrival" onClick="popUpCalendar(this, frmUsr.dateArrival, 'dd-mm-yyyy',minYear);" size="10" ><br><br>
             -->

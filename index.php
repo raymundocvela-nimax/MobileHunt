@@ -1,16 +1,19 @@
 //1 setInst : 2 setusr
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html style="height:100%" xmlns="http://www.w3.org/1999/xhtml"> <!--style="height:100%" es para poder ocupar el porcentaje en el div del mapa, si no se pone el div q se genera es de altura � height 0-->
-    <head>
-        <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+<!DOCTYPE html>
 
-        <title> Mobile Hunt</title>
-    </head>
-    <body>
+<!--
+<html style="height:100%" xmlns="http://www.w3.org/1999/xhtml"> 
+!--style="height:100%" es para poder ocupar el porcentaje en el div del mapa, 
+si no se pone el div q se genera es de altura � height 0-->
+<head>
+    <meta charset="UTF-8">
+    <title> Proyecto Terminal: Mobile Hunt</title>
+</head>
+<body>
     Elige Institución o Compañia:
-        <form name="frmComp" id="frmComp" action="setusr.php" method="get">
+    <form name="frmComp" id="frmComp" action="setusr.php" method="get">
         <?php 
             include('conectar.php');
             //institucion
@@ -25,6 +28,6 @@
             mysql_close();
         ?>
         <input type="submit" value="aceptar" align="center" />
-        </form>
+    </form>
     </body>
 </html>    
