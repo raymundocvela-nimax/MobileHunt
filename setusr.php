@@ -1,10 +1,10 @@
 <?php if (!isset($_SESSION))session_start(); else echo "sesión iniciada"; ?>
 <!--iniciamos variables de sessión-->
 //2 setusr : 3 getpuntos
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html style="height:100%" xmlns="http://www.w3.org/1999/xhtml"> <!--style="height:100%" es para poder ocupar el porcentaje en el div del mapa, si no se pone el div q se genera es de altura � height 0-->
+<!DOCTYPE html>
+<html> <!--style="height:100%" es para poder ocupar el porcentaje en el div del mapa, si no se pone el div q se genera es de altura � height 0-->
     <head>
-        <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+        <meta charset="utf-8" />
         <!--Calendario-->
         <link rel="stylesheet" href="build/kalendae.css" type="text/css" charset="utf-8">
         <script src="build/kalendae.js" type="text/javascript" charset="utf-8"></script>
@@ -30,7 +30,6 @@
     </head>
     <body>
         <form name="frmUsr" id="frmUsr" action="getpuntosgl_1.php" onsubmit="return validar()" method="get">
-            <center>
             <?php 
                 include('conectar.php');
                 include('deletefile.php');
@@ -69,8 +68,8 @@
                 mysql_close($con);                
             ?>
             Día (dd-mm-aaaa)<br>
-            <input type="text" name="fecha" id="dateArrival" class="auto-kal" data-kal="format:'DD-MM-YYYY', weekStart:'1', selected:Kalendae.moment()" size="10"><br><br>
-            <!--
+            <input type="text" required="required" name="fecha" id="dateArrival" class="auto-kal" data-kal="format:'DD-MM-YYYY', weekStart:'1', selected:Kalendae.moment()" size="10"><br><br>
+                <!--
             <input name="fecha" type="text" id="dateArrival" onClick="popUpCalendar(this, frmUsr.dateArrival, 'dd-mm-yyyy',minYear);" size="10" ><br><br>
             -->
             <input type="submit" value="aceptar" align="center" />
