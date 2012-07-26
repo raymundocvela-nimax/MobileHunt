@@ -3,7 +3,6 @@
     else echo "sesión iniciada";
 ?>
 <!DOCTYPE html>
-<html>
 <head>
     <meta charset="utf-8" />
     <title> Hunt GPS - Proyecto Terminal Ingeniería en Computación UAM Azcapotzalco</title>
@@ -112,12 +111,9 @@
                 it.setMap(map);
             }
             
-            function chkShowHide(chkboxRestriccion){
-                if(chkboxRestriccion.checked){
-                    it = new google.maps.Polygon(polyOptions)
-                    it.setMap(map)
-                }
-                else it.setMap(null)
+            function chkShow(){
+
+                alert(document.getElementsByName(chkRes).value)
             }
             
             
@@ -142,7 +138,9 @@
             	<div class="fechaMenu"><?php $fecha=date("d/m/y"/*." "."h:i:s"*/); echo $fecha;?> </div><!--fecha-->
                 <div class="relojMenu" id="relojMenu"></div>
             </div>
+
             <div class="formulario" id="formulario" style="overflow:auto">
+<input type="checkbox" name="chkboxRes" onclick="chkShow()" >Mostrar Restricción</input>'; 
  <!--           div form
                 <div class="usr" id="usr" style="overflow:auto">
                     div usr
@@ -161,7 +159,7 @@
                     if($row[0]!=null){
                         $js=$row[0];
                         echo '<script type="text/javascript">'.$js.'</script>';                    
-                        echo '<input type="checkbox" name="chkboxRes"  onclick="chkShowHide(this)" >Mostrar Restricción</input>';
+                        echo '<button type="button" onclick="showRestriccion()" >Mostrar Restricción</button>';
                         echo '<script type="text/javascript">hayRestriccion=1;</script>';                    
                     }
                     else{
@@ -240,7 +238,9 @@
                 echo '<script type="text/javascript">rutaKml="'.$rutaKml.'"</script>';    
                 echo '<script type="text/javascript">existLoc=1;</script>';  
             }
-            else 'Error en KML<script type="text/javascript">existLoc=0;</script>';           
+            else 'Error en KML<script type="text/javascript">existLoc=0;</script>';
+            
+            
         }
         else{
             echo '<script type="text/javascript">existLoc=0;</script>';       
