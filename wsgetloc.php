@@ -11,7 +11,7 @@
 
             //Verificamos si las coordenadas estan denro del poligono
             $usr=$_REQUEST['usr'];
-            $inOut="";
+            $inOut="sin_restricción";
             echo $usr;
             //obtener id usr
             $qUsr="SELECT idusuarios FROM usuarios WHERE usuario='$usr'";
