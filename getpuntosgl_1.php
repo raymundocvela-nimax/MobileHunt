@@ -65,7 +65,7 @@
                 map = new google.maps.Map(document.getElementById("map_canvas"), settings);
             }
 
-            function loadkml(){
+            function loadKml(chkboxRuta){
                 /* 
                 var latlng = new google.maps.LatLng(23.919722222222223, -102.1625); //Centro del Mapa
                 var settings = {
@@ -78,23 +78,16 @@
                 mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
                 var map = new google.maps.Map(document.getElementById("map_canvas"), settings)*/
-                if(existLoc==1)
-                    {
-                    rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/'+rutaKml);
-                    rutaLayer.setMap(map);
+                if(existLoc==1){
+                    if(chkboxRuta.checked){
+                        rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/'+rutaKml);
+                        rutaLayer.setMap(map);
+                    }
+                    else rutaLayer.setMap(null)
                     //window.open("https://maps.google.com/maps?q=http:%2F%2Figconsultores.net%2Fraymundo%2Ffiles%2F"+"1340900465.kml");
                 }
                 else alert("No hay Datos");
 
-            }
-
-            function abrirPag(url){
-                if(hayRestriccion==1){
-                    mensaje=confirm("Ya existe una restricción, ¿deseas eliminarla y agregar una nueva?");
-                    if(mensaje) window.location.href = url; //abre la pagina en la misma ventana si da click en ACEPTAR
-                }
-                else window.location.href = url; //abre la pagina en la misma ventana
-                //window.open(url,"","algun parametro que desees"); abre la pagina en nueva ventana
             }
 
             function showRestriccion(chkboxRestriccion){
@@ -117,7 +110,16 @@
                 }
                 else it.setMap(null)
             }
-            
+
+            function abrirPag(url){
+                if(hayRestriccion==1){
+                    mensaje=confirm("Ya existe una restricción, ¿deseas eliminarla y agregar una nueva?");
+                    if(mensaje) window.location.href = url; //abre la pagina en la misma ventana si da click en ACEPTAR
+                }
+                else window.location.href = url; //abre la pagina en la misma ventana
+                //window.open(url,"","algun parametro que desees"); abre la pagina en nueva ventana
+            }
+
             function funciones(){//Juntamos las funciones en una sola, para poderlas ejecutar en el onload del body
                 initialize();
                 HoraActual(<?php echo date("H",time()/*-3600*/).", ".date("i").", ".date("s"); ?>); //time()-3600 resta 1 hora al tiempo del servidor para ajustarlo a nuestra hora
@@ -159,7 +161,7 @@
                         if($row[0]!=null){
                             $js=$row[0];
                             echo '<script type="text/javascript">'.$js.'</script>';                    
-                            echo 'echo <input type="checkbox" name="chkboxRes"  onclick="showRestriccion(this)" >Mostrar Restricción</input>';
+                            echo '<input type="checkbox" name="chkboxRes"  onclick="showRestriccion(this)" >Mostrar Restricción</input>';
                             echo '<script type="text/javascript">hayRestriccion=1;</script>';                    
                         }
                         else{
@@ -167,8 +169,8 @@
                             echo '<script type="text/javascript">hayRestriccion=0;</script>';                    
                         } 
                     ?>
-                    <button type="button" align="center" onclick="abrirPag('v3tool_restricciones.html')">Establecer Restricción</button> 
-                    <button type="button" align="center" onclick="loadkml()">Ver ruta </button>
+                    <button type="button" align="center" onclick="abrirPag('v3tool_restricciones.html')">Establecer Restricción</button><br />
+                    <input type="checkbox" name="chkboxRuta"  onclick="loadKml(this)" >Mostrar Ruta</input>
                     <?php obtenerDatos();?>
                 </div>     
             </div>
