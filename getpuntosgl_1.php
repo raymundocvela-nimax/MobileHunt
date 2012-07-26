@@ -97,7 +97,7 @@
                 //window.open(url,"","algun parametro que desees"); abre la pagina en nueva ventana
             }
 
-            function showRestriccion(){
+            function showRestriccion(chkboxRestriccion){
                 /*
                 var latlng = new google.maps.LatLng(23.919722222222223, -102.1625); //Centro del Mapa
                 var settings = {
@@ -111,10 +111,13 @@
                 };
                 var map = new google.maps.Map(document.getElementById("map_canvas"), settings)
                 */
-                it = new google.maps.Polygon(polyOptions);
-                it.setMap(map);
+                if(chkboxRestriccion.checked){
+                    it = new google.maps.Polygon(polyOptions)
+                    it.setMap(map)
+                }
+                else it.setMap(null)
             }
-
+            
             function funciones(){//Juntamos las funciones en una sola, para poderlas ejecutar en el onload del body
                 initialize();
                 HoraActual(<?php echo date("H",time()/*-3600*/).", ".date("i").", ".date("s"); ?>); //time()-3600 resta 1 hora al tiempo del servidor para ajustarlo a nuestra hora
@@ -156,7 +159,7 @@
                         if($row[0]!=null){
                             $js=$row[0];
                             echo '<script type="text/javascript">'.$js.'</script>';                    
-                            echo '<button type="button" onclick="showRestriccion()" >Mostrar Restricción</button>';
+                            echo 'echo <input type="checkbox" name="chkboxRes"  onclick="showRestriccion(this)" >Mostrar Restricción</input>';
                             echo '<script type="text/javascript">hayRestriccion=1;</script>';                    
                         }
                         else{
