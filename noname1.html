@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="">
+<title>Untitled</title>
+<link rel="stylesheet" type="text/css" href="my.css">
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width; user-scalable=0;">
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=true" type="text/javascript"></script>
+    <script type="">
+    <script type=""></script>
+            $inOut="";
+
+            //Crea el poligono
+            <script type="text/javascript">
+            var inOut="out";
+            var punto= new google.maps.LatLng('.$laty.','.$lonx.');
+            '.$js.';
+            var polyRest = new google.maps.Polygon(polyOptions);
+            if (google.maps.geometry.poly.containsLocation(punto,polyRest))
+            inOut="in";
+            else inOut="out"
+            </script>';
+            echo "<br>usr:".$_REQUEST['usr'];
+            echo "<br>laty:".$_REQUEST['laty'];
+            echo "<br>lonx:".$_REQUEST['lonx']."<br>";
+            //Se pasa el valor de javascript
+            $inOut="<script>document.write(inOut)</script>";
+        }
+        else "no hay restricción de área";
+        echo "<br>inout var PHP?:".$inOut."-";
+        mysql_close();
+</head>
+<body>
+
+</body>
+</html>
