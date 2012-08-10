@@ -1,7 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
+<!--Web service que recibe consulta la restricción de un determinado usuario, inserta una localización a la DB 
+y responde indicando _1| si se inserto o _0| en caso contrario + el código en JAvaScript de la restricción de área del usuario
+-->
 <html>
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <meta charset="UTF-8"/>
     </head>
     <body>
         <?php
@@ -25,31 +28,21 @@
                 $laty=$_REQUEST['laty'];//longitud
                 $lonx=$_REQUEST['lonx'];//latitud
                 //Crea el poligono
-                echo '
-                <script type="text/javascript">
-                var inOut="00_|";
-                var punto= new google.maps.LatLng('.$laty.','.$lonx.');
-                '.$js.';
-                var polyRest = new google.maps.Polygon(polyOptions);
-                if (google.maps.geometry.poly.containsLocation(punto,polyRest))
-                inOut="in_|";
-                else inOut="out|";
-                </script>';
                 echo "<br>usr:".$_REQUEST['usr'];
                 echo "<br>laty:".$_REQUEST['laty'];
                 echo "<br>lonx:".$_REQUEST['lonx']."<br>";
                 //Se pasa el valor de javascript
-                $inOut="<script>document.write(inOut)</script>";
+                //$inOut="<script>document.write(inOut)</script>";
             }
-            else echo "no hay restricción de área";
-            echo "inout var PHP?:".$inOut."-";
-
+            else {
+                echo "no hay restricción de área";
+                $js="?";
+            }
+            //Insertamos localizacion en DB
             //$phpdate=date("Y-m-d H:i:s",strtotime($_REQUEST['timestamp']));
             //$phpdate=date("Y-m-d H:i:s",($_REQUEST['timestamp']));
             $phpdate=date("Y-m-d H:i:s");
             //$query="INSERT INTO puntos (usuarios_idUsuarios, longitud, latitud, fecha, provider) VALUES ('".$idUsr[0]."','".$_REQUEST['lonx']."','".$_REQUEST['laty']."','".$_REQUEST['timeStamp']."','".$_REQUEST['bestprov']."')";
-
-            //los valores de Laty y Lonx estan alreves en la db
             $query="INSERT INTO puntos (usuarios_idUsuarios, latitud, longitud, fecha, provider) VALUES ('".$idUsr[0]."','".$_REQUEST['laty']."','".$_REQUEST['lonx']."','".$phpdate."','".$_REQUEST['bestprov']."')";
             $insert=mysql_query($query);
             if(!$insert){
