@@ -288,19 +288,19 @@
                 var latlng;
                 //obtenemos localizacion del explorador
                 if (navigator.geolocation){
-                    navigator.geolocation.getCurrentPosition( 
-                        function (position) {  
+                    navigator.geolocation.getCurrentPosition(
+                        function (position) {
                             centerLat=position.coords.latitude;
                             centerLng=position.coords.longitude;
                             //alert ('loc obtenida: '+ centerLat + ',' + centerLng);
                             z=11;
                             mapSet(centerLat,centerLng,z);
 
-                        }, 
-                        // Si no se puede obtener 
+                        },
+                        // Si no se puede obtener
                         function (error)
                         {
-                            switch(error.code) 
+                            switch(error.code)
                             {
                                 case error.TIMEOUT:
                                     alert ('Timeout');
@@ -798,7 +798,7 @@
 
                         //toolID=2;
 
-                        
+
                         // change to polyline draw mode not allowed
                         if(outerArray.length > 0) { //indicates polygon with hole
                         toolID = 2;
@@ -843,7 +843,7 @@
                         if(codeID == 1) logCode1(); // KML
                         if(codeID == 2) logCode4(); // Javascipt
 
-                        
+
 
 
                     }
@@ -2253,22 +2253,22 @@
             // write javascript
             function logCode4(){
                 if (notext === true) return;
-                gob('coords1').value = 'var myCoordinates = [\n';
+                gob('coords1').value = 'var myCoordinates = [';
                 for(var i=0; i<pointsArray.length; i++){
                     if(i == pointsArray.length-1){
-                        gob('coords1').value += 'new google.maps.LatLng('+pointsArray[i] + ')\n';
+                        gob('coords1').value += 'new google.maps.LatLng('+pointsArray[i] + ')';
                     }else{
-                        gob('coords1').value += 'new google.maps.LatLng('+pointsArray[i] + '),\n';
+                        gob('coords1').value += 'new google.maps.LatLng('+pointsArray[i] + '),';
                     }
                 }
                 if(toolID == 1){
-                    gob('coords1').value += '];\n';
-                    var options = 'var polyOptions = {\n'
-                    +'path: myCoordinates,\n'
-                    +'strokeColor: "'+polylinestyles[lcur].color+'",\n'
-                    +'strokeOpacity: '+polylinestyles[lcur].lineopac+',\n'
-                    +'strokeWeight: '+polylinestyles[lcur].width+'\n'
-                    +'}\n';
+                    gob('coords1').value += '];';
+                    var options = 'var polyOptions = {'
+                    +'path: myCoordinates,'
+                    +'strokeColor: "'+polylinestyles[lcur].color+'",'
+                    +'strokeOpacity: '+polylinestyles[lcur].lineopac+','
+                    +'strokeWeight: '+polylinestyles[lcur].width+''
+                    +'}';
                     gob('coords1').value += options;
                     /*
                     gob('coords1').value +='var it = new google.maps.Polyline(polyOptions);\n'
@@ -2277,15 +2277,15 @@
                     placemarks[plmcur].poly = "pl";
                 }
                 if(toolID == 2){
-                    gob('coords1').value += '];\n';
-                    var options = 'var polyOptions = {\n'
-                    +'path: myCoordinates,\n'
-                    +'strokeColor: "'+polygonstyles[pcur].color+'",\n'
-                    +'strokeOpacity: '+polygonstyles[pcur].lineopac+',\n'
-                    +'strokeWeight: '+polygonstyles[pcur].width+',\n'
-                    +'fillColor: "'+polygonstyles[pcur].fill+'",\n'
-                    +'fillOpacity: '+polygonstyles[pcur].fillopac+'\n'
-                    +'}\n';
+                    gob('coords1').value += '];';
+                    var options = 'var polyOptions = {'
+                    +'path: myCoordinates,'
+                    +'strokeColor: "'+polygonstyles[pcur].color+'",'
+                    +'strokeOpacity: '+polygonstyles[pcur].lineopac+','
+                    +'strokeWeight: '+polygonstyles[pcur].width+','
+                    +'fillColor: "'+polygonstyles[pcur].fill+'",'
+                    +'fillOpacity: '+polygonstyles[pcur].fillopac+''
+                    +'}';
                     gob('coords1').value += options;
                     /*
                     gob('coords1').value +='var it = new google.maps.Polygon(polyOptions);\n'
@@ -2299,38 +2299,38 @@
             function logCode5() {
                 if (notext === true) return;
                 var hstring = "";
-                gob('coords1').value = 'var outerPoints = [\n';
+                gob('coords1').value = 'var outerPoints = [';
                 for(var i=0; i<outerArray.length; i++){
                     if(i == outerArray.length-1){
-                        gob('coords1').value += 'new google.maps.LatLng('+outerArray[i] + ')\n'; // without trailing comma
+                        gob('coords1').value += 'new google.maps.LatLng('+outerArray[i] + ')'; // without trailing comma
                     }else{
-                        gob('coords1').value += 'new google.maps.LatLng('+outerArray[i] + '),\n';
+                        gob('coords1').value += 'new google.maps.LatLng('+outerArray[i] + '),';
                     }
                 }
-                gob('coords1').value += '];\n';
+                gob('coords1').value += '];';
                 for(var m=0; m<innerArrays.length; m++){
-                    gob('coords1').value += 'var innerPoints'+m+' = [\n';
+                    gob('coords1').value += 'var innerPoints'+m+' = [';
                     var holestring = 'innerPoints'+m;
                     if(m<innerArrays.length-1) holestring += ',';
                     hstring += holestring;
                     for(i=0; i<innerArrays[m].length; i++){
                         if(i == innerArrays[m].length-1){
-                            gob('coords1').value += 'new google.maps.LatLng('+innerArrays[m][i] + ')\n';
+                            gob('coords1').value += 'new google.maps.LatLng('+innerArrays[m][i] + ')';
                         }else{
-                            gob('coords1').value += 'new google.maps.LatLng('+innerArrays[m][i] + '),\n';
+                            gob('coords1').value += 'new google.maps.LatLng('+innerArrays[m][i] + '),';
                         }
                     }
-                    gob('coords1').value += '];\n';
+                    gob('coords1').value += '];';
                 }
-                gob('coords1').value += 'var myCoordinates = [outerPoints,'+hstring+'];\n';
-                gob('coords1').value += 'var polyOptions = {\n'
-                +'paths: myCoordinates,\n'
-                +'strokeColor: "'+polygonstyles[pcur].color+'",\n'
-                +'strokeOpacity: '+polygonstyles[pcur].lineopac+',\n'
-                +'strokeWeight: '+polygonstyles[pcur].width+',\n'
-                +'fillColor: "'+polygonstyles[pcur].fill+'",\n'
-                +'fillOpacity: '+polygonstyles[pcur].fillopac+'\n'
-                +'};\n';
+                gob('coords1').value += 'var myCoordinates = [outerPoints,'+hstring+'];';
+                gob('coords1').value += 'var polyOptions = {'
+                +'paths: myCoordinates,'
+                +'strokeColor: "'+polygonstyles[pcur].color+'",'
+                +'strokeOpacity: '+polygonstyles[pcur].lineopac+','
+                +'strokeWeight: '+polygonstyles[pcur].width+','
+                +'fillColor: "'+polygonstyles[pcur].fill+'",'
+                +'fillOpacity: '+polygonstyles[pcur].fillopac+''
+                +'};';
                 /*
                 +'var it = new google.maps.Polygon(polyOptions);\n'
                 +'it.setMap(map);\n';
@@ -2343,32 +2343,32 @@
                 if (notext === true) return;
                 //placemarks[plmcur].style = polygonstyles[pcur].name;
                 if(codeID == 2) { // javascript
-                    gob('coords1').value = 'var rectangle = new google.maps.Rectangle({\n'
-                    +'map: map,\n'
-                    +'fillColor: '+polygonstyles[pcur].fill+',\n'
-                    +'fillOpacity: '+polygonstyles[pcur].fillopac+',\n'
-                    +'strokeColor: '+polygonstyles[pcur].color+',\n'
-                    +'strokeOpacity: '+polygonstyles[pcur].lineopac+',\n'
-                    +'strokeWeight: '+polygonstyles[pcur].width+'\n'
-                    +'});\n';
-                    gob('coords1').value += 'var sWest = new google.maps.LatLng('+southWest.lat().toFixed(6)+','+southWest.lng().toFixed(6)+');\n'
-                    +'var nEast = new google.maps.LatLng('+northEast.lat().toFixed(6)+','+northEast.lng().toFixed(6)+');\n'
-                    +'var bounds = new google.maps.LatLngBounds(sWest,nEast);\n'
-                    +'rectangle.setBounds(bounds);\n';
-                    gob('coords1').value += '\n\\\\ Code for polyline rectangle\n';
-                    gob('coords1').value += 'var myCoordinates = [\n';
-                    gob('coords1').value += southWest.lat().toFixed(6) + ',' + southWest.lng().toFixed(6) + ',\n' +
-                    southWest.lat().toFixed(6) + ',' + northEast.lng().toFixed(6) + ',\n' +
-                    northEast.lat().toFixed(6) + ',' + northEast.lng().toFixed(6) + ',\n' +
-                    northEast.lat().toFixed(6) + ',' + southWest.lng().toFixed(6) + ',\n' +
-                    southWest.lat().toFixed(6) + ',' + southWest.lng().toFixed(6) + '\n';
-                    gob('coords1').value += '];\n';
-                    var options = 'var polyOptions = {\n'
-                    +'path: myCoordinates,\n'
-                    +'strokeColor: "'+polygonstyles[pcur].color+'",\n'
-                    +'strokeOpacity: '+polygonstyles[pcur].lineopac+',\n'
-                    +'strokeWeight: '+polygonstyles[pcur].width+'\n'
-                    +'}\n';
+                    gob('coords1').value = 'var rectangle = new google.maps.Rectangle({'
+                    +'map: map,'
+                    +'fillColor: '+polygonstyles[pcur].fill+','
+                    +'fillOpacity: '+polygonstyles[pcur].fillopac+','
+                    +'strokeColor: '+polygonstyles[pcur].color+','
+                    +'strokeOpacity: '+polygonstyles[pcur].lineopac+','
+                    +'strokeWeight: '+polygonstyles[pcur].width+''
+                    +'});';
+                    gob('coords1').value += 'var sWest = new google.maps.LatLng('+southWest.lat().toFixed(6)+','+southWest.lng().toFixed(6)+');'
+                    +'var nEast = new google.maps.LatLng('+northEast.lat().toFixed(6)+','+northEast.lng().toFixed(6)+');'
+                    +'var bounds = new google.maps.LatLngBounds(sWest,nEast);'
+                    +'rectangle.setBounds(bounds);';
+                    gob('coords1').value += '\\\\ Code for polyline rectangle';
+                    gob('coords1').value += 'var myCoordinates = [';
+                    gob('coords1').value += southWest.lat().toFixed(6) + ',' + southWest.lng().toFixed(6) + ',' +
+                    southWest.lat().toFixed(6) + ',' + northEast.lng().toFixed(6) + ',' +
+                    northEast.lat().toFixed(6) + ',' + northEast.lng().toFixed(6) + ',' +
+                    northEast.lat().toFixed(6) + ',' + southWest.lng().toFixed(6) + ',' +
+                    southWest.lat().toFixed(6) + ',' + southWest.lng().toFixed(6) + '';
+                    gob('coords1').value += '];';
+                    var options = 'var polyOptions = {'
+                    +'path: myCoordinates,'
+                    +'strokeColor: "'+polygonstyles[pcur].color+'",'
+                    +'strokeOpacity: '+polygonstyles[pcur].lineopac+','
+                    +'strokeWeight: '+polygonstyles[pcur].width+''
+                    +'}';
                     gob('coords1').value += options;
                     /*
                     gob('coords1').value +='var it = new google.maps.Polyline(polyOptions);\n'
@@ -2798,7 +2798,7 @@
             <div class="topbutton">
                 <input type="button" onclick="deleteLastPoint();" value="Eliminar último vértice"/>
             </div>
-            
+
             <!--<div class="topbutton">
             <input type="button" onclick="styleprep();" value="Style Options"/>
             </div>
@@ -3204,7 +3204,7 @@ INSTRUCCIONES:
         </script>
         <!--script para busqueda de palabras claves en el Texto
         <script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>
-        --> 
+        -->
     </body>
 
 </html>
