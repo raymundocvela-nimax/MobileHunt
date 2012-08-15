@@ -19,8 +19,13 @@
     if($row[0]!=NULL){
         //Si hay restriccion de área?
         $js=$row[0];
-        $pattern=array("(\r\n)", "(\n\r)", "(\n)", "(\r)", ("\\"));
+        $pattern=array("(\r\n)", "(\n\r)", "(\n)", "(\r)");
         $js=preg_replace($pattern," ",$js);
+
+        $pattern=array("(\")");
+        $js=preg_replace($pattern,"<comas>",$js);
+
+
 //        echo "<br>restricción: ".$js."--\n";
         $laty=$_REQUEST['laty'];//longitud
         $lonx=$_REQUEST['lonx'];//latitud
