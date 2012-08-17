@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+         <script src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=true" type="text/javascript">
+    </script>
+        <script type="text/javascript">
+            var markerIn = google.maps.geometry.poly.containsLocation(wendysMarker.getPosition(), polySector3PillburyPleasant);
+
+            var markerOut = google.maps.geometry.poly.containsLocation(userMarker.getPosition(), polySector3PillburyPleasant);
+
+            console.log(markerIn);
+
+            console.log(markerOut);
+        </script>
+
+    </head>
+    <body>
+
+    </body>
+</html>

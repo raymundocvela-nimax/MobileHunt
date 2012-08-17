@@ -41,7 +41,7 @@
     }
     else {
         echo "no hay restricción de área";
-        $js="?";
+        $js="-SR-";
     }
     //Insertamos localizacion en DB
     //$phpdate=date("Y-m-d H:i:s",strtotime($_REQUEST['timestamp']));
