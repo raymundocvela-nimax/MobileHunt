@@ -1,13 +1,38 @@
 <?php
 include('conectar.php');
+$usr=$_REQUEST['usr'];
+$usrUpdate=$_REQUEST['usrupdate'];
+$comp=$_REQUEST['comp'];
+$desc=$_REQUEST['desc'];
+$mues=$_REQUEST['mues'];
+$psw=$_REQUEST['psw'];
+
+if($usr==$usrUpdate){
+ $qUpdate="UPDATE usuarios SET usuario ='".$usr."',  WHERE usuario = 'RCV2';"
+}
 //Existe usuario?
 $qExistUsr="SELECT usuario FROM usuarios WHERE usuario='".$_REQUEST['usr']."'";
 $result=mysql_query($qExistUsr);
 $noRows=mysql_num_rows($result);
 if($noRows>0) $responsePhp="Ya existe usuario"; //si existe
 else {//No existe
-        //Existe institucion?
-        $qExistInsti="SELECT nombre FROM institucion WHERE nombre='".$_REQUEST['comp']."'";
+
+
+        //inserta usuario
+        $query="INSERT INTO usuarios (institucion_idinstitucion, usuario, descripcion, muestreo,psw_usr) VALUES ('".$idInsti."','".$_REQUEST['usr']."','".$_REQUEST['desc']."','".$_REQUEST['mues']."','".$_REQUEST['psw']."')";
+        $insert=mysql_query($query);
+        if(!$insert){
+         $responsePhp=$responsePhp."_0 usr no insertado";
+        }
+        else $responsePhp=$responsePhp."_1 usr insertado";
+ }
+
+ print(json_encode($responsePhp." consulta usr: ".$query));
+ mysql_close();
+
+ function $idInti insti($comp){
+      //Existe institucion?
+        $qExistInsti="SELECT nombre FROM institucion WHERE nombre='".$comp."'";
         $result=mysql_query($qExistInsti);
         $noRows=mysql_num_rows($result);
         if($noRows>0){
@@ -29,16 +54,9 @@ else {//No existe
             else $responsePhp="1 insti insertada";
         $responsePhp=$responsePhp." consulta insti".$qInsti;
         }
-
-        //inserta usuario
-        $query="INSERT INTO usuarios (institucion_idinstitucion, usuario, descripcion, muestreo,psw_usr,mail) VALUES ('".$idInsti."','".$_REQUEST['usr']."','".$_REQUEST['desc']."','".$_REQUEST['mues']."','".$_REQUEST['psw']."','".$_REQUEST['mail']."')";
-        $insert=mysql_query($query);
-        if(!$insert){
-         $responsePhp=$responsePhp."_0 usr no insertado";
-        }
-        else $responsePhp=$responsePhp."_1 usr insertado";
  }
 
- print(json_encode($responsePhp." consulta usr: ".$query));
- mysql_close();
+
+
+
 ?>
