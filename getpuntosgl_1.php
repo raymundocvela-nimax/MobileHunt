@@ -10,7 +10,7 @@
         <title> Hunt GPS - Proyecto Terminal Ingeniería en Computación UAM Azcapotzalco</title>
 
         <!-- API Google MAPS muestra configuración Mapa-->
-        <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script> 
+        <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 
         <!-- Hoja de Estilo-->
         <link href="Style/HuntGPS.css" rel="stylesheet" type="text/css" />
@@ -26,7 +26,7 @@
             //var map;
             var hayRestriccion;
             var existLoc;
-            //se ponen <!-- por si el explorador no es compatibel con Javascript no salga impreso el codigo            
+            //se ponen <!-- por si el explorador no es compatibel con Javascript no salga impreso el codigo
             function HoraActual(hora, minuto, segundo){
                 segundo = segundo + 1;
                 if(segundo == 60) {
@@ -46,7 +46,7 @@
                 HoraCompleta= hora + " : " + minuto + " : " + segundo;
                 document.getElementById('relojMenu').innerHTML = HoraCompleta;
                 setTimeout("HoraActual("+hora+", "+minuto+", "+segundo+")", 1000);
-            } 
+            }
 
             //    <!-- API Google MAPS muestra configuración Mapa-->
 
@@ -66,7 +66,7 @@
             }
 
             function loadKml(chkboxRuta){
-                /* 
+                /*
                 var latlng = new google.maps.LatLng(23.919722222222223, -102.1625); //Centro del Mapa
                 var settings = {
                 zoom: 6,
@@ -125,18 +125,18 @@
                 HoraActual(<?php echo date("H",time()/*-3600*/).", ".date("i").", ".date("s"); ?>); //time()-3600 resta 1 hora al tiempo del servidor para ajustarlo a nuestra hora
             }
         </script>
-    </head>     
+    </head>
     <body onload="funciones()">
         <!-- dothird(); para cargar otra accion en el body -->
         <div class="contenedor">
             <div class="encabezado">
                 <h1>Mobile Hunt - Proyecto Terminal
                     <br />Ingeniería en Computación UAM Azcapotzalco</h1>
-            </div>        
+            </div>
             <div class="menu">
                 <div class="encabezadoMenu"><h1>Panel de Administración</h1>
                     <a href="javascript:history.go(-1)">&lt&ltatrás</a>
-                    | 
+                    |
                     <a href="index.php">Principal</a>
                     <div class="fechaMenu"><?php $fecha=date("d/m/y"/*." "."h:i:s"*/); echo $fecha;?> </div><!--fecha-->
                     <div class="relojMenu" id="relojMenu"></div>
@@ -147,9 +147,9 @@
                     <div class="usr" id="usr" style="overflow:auto">
                     div usr
                     </div>
-                    -->                
+                    -->
                     <!-- verificamos si existe restricción guardada
-                    -->                
+                    -->
                     <?php
                         include('conectar.php');
                         $idUsr=$_REQUEST['usr'];
@@ -160,19 +160,19 @@
                         $row=mysql_fetch_array($result);
                         if($row[0]!=null){
                             $js=$row[0];
-                            echo '<script type="text/javascript">'.$js.'</script>';                    
+                            echo '<script type="text/javascript">'.$js.'</script>';
                             echo '<input type="checkbox" name="chkboxRes"  onclick="showRestriccion(this)" >Mostrar Restricción</input>';
-                            echo '<script type="text/javascript">hayRestriccion=1;</script>';                    
+                            echo '<script type="text/javascript">hayRestriccion=1;</script>';
                         }
                         else{
                             echo "<br>El usuario:".$_SESSION['usr']." no tiene restricción de área";
-                            echo '<script type="text/javascript">hayRestriccion=0;</script>';                    
-                        } 
+                            echo '<script type="text/javascript">hayRestriccion=0;</script>';
+                        }
                     ?>
                     <button type="button" align="center" onclick="abrirPag('v3tool_restricciones.html')">Establecer Restricción</button><br />
                     <input type="checkbox" name="chkboxRuta"  onclick="loadKml(this)" >Mostrar Ruta</input>
                     <?php obtenerDatos();?>
-                </div>     
+                </div>
             </div>
             <div class="mapa" id="map_canvas">Mapa</div>
             <div class="pie">Pie</div>
@@ -198,7 +198,6 @@
                 $row=mysql_fetch_array($result);
                 $nomUsr=$row[0];
                 $_SESSION['nomUsr']=$nomUsr;
-
                 echo"<br>Institucion/Compania:".$_SESSION['idInsti']."- $nomInsti <br>";
                 echo"Nombre de Usuario: ".$_SESSION['idUsr']." - $nomUsr <br>";
                 echo"Fecha:".$fechaQuery."<br>";
@@ -207,9 +206,9 @@
                 $result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND fecha='".$fechaQuery."'") or die("error".mysql_error());
                 */
                 $query=mysql_query("SELECT idpuntos,latitud,longitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$_SESSION['idUsr']."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."'") or die("error".mysql_error());
-                //echo "consulta SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."')";        
+                //echo "consulta SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND DATE_FORMAT(fecha,'%d-%m-%Y')='".$fechaQuery."')";
                 $numRow=mysql_num_rows($query);
-                if($numRow!=0){            
+                if($numRow!=0){
                     //creamos tabla
                     echo "<table border = '1'> ";
                     //nombre filas
@@ -220,14 +219,15 @@
                     echo "<td><b>Fecha y hora</b></td> ";
                     echo "<td><b>Provedor de localización</b></td> ";
                     echo "</tr> ";
-                    //datos      
+                    //datos
                     while ($row=mysql_fetch_array($query)){
                         echo "<tr> ";
                         echo "<td>$row[0]</td> ";
                         echo "<td>$row[1]</td> ";
                         echo "<td>$row[2]</td> ";
                         echo "<td>$row[3]</td> ";
-                        echo "<td>$row[4]</td> ";
+                        $fecha=preg_replace("(_PROVIDER)","",$row[4]);
+                        echo "<td>$fecha</td> ";
                         echo "</tr> ";
                     }
                     echo "</table> ";
@@ -237,18 +237,18 @@
                     {
                         echo"<br>nombre kml: ".$rutaKml;
                         //pasamos valor a variable de javascript para mostrar kml
-                        echo '<script type="text/javascript">rutaKml="'.$rutaKml.'"</script>';    
-                        echo '<script type="text/javascript">existLoc=1;</script>';  
+                        echo '<script type="text/javascript">rutaKml="'.$rutaKml.'"</script>';
+                        echo '<script type="text/javascript">existLoc=1;</script>';
                     }
                     else 'Error en KML<script type="text/javascript">existLoc=0;</script>';
 
 
                 }
                 else{
-                    echo '<script type="text/javascript">existLoc=0;</script>';       
+                    echo '<script type="text/javascript">existLoc=0;</script>';
                     echo '<b><br>No existen localizaciones asociadas a esta fecha:</b>'.$fechaQuery;
-                }        
-            }            
-        ?>            
+                }
+            }
+        ?>
     </body>
 </html>
