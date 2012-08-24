@@ -46,7 +46,7 @@
     //Insertamos localizacion en DB
     //$phpdate=date("Y-m-d H:i:s",strtotime($_REQUEST['timestamp']));
     //$phpdate=date("Y-m-d H:i:s",($_REQUEST['timestamp']));
-    $phpdate=date("d-m-Y H:i:s");
+    $phpdate=date("Y-m-d H:i:s");
     //$query="INSERT INTO puntos (usuarios_idUsuarios, longitud, latitud, fecha, provider) VALUES ('".$idUsr[0]."','".$_REQUEST['lonx']."','".$_REQUEST['laty']."','".$_REQUEST['timeStamp']."','".$_REQUEST['bestprov']."')";
     $query="INSERT INTO puntos (usuarios_idUsuarios, latitud, longitud, fecha, provider) VALUES ('".$idUsr[0]."','".$_REQUEST['laty']."','".$_REQUEST['lonx']."','".$phpdate."','".$_REQUEST['bestprov']."')";
     $insert=mysql_query($query);
