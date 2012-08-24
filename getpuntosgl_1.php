@@ -2,12 +2,11 @@
     if (!isset($_SESSION))session_start();
     else echo "sesión iniciada";
 ?>
-<!DOCTYPE>
-
+<!DOCTYPE html>
 <html style="height:100%"> <!--style="height:100%" es para poder ocupar el porcentaje en el div del mapa, si no se pone el div q se genera es de altura � height 0-->
     <head>
         <meta charset="utf-8" />
-        <title> Hunt GPS - Proyecto Terminal Ingeniería en Computación UAM Azcapotzalco</title>
+        <title>Mobile Hunt - Proyecto Terminal Ingeniería en Computación UAM Azcapotzalco</title>
 
         <!-- API Google MAPS muestra configuración Mapa-->
         <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
@@ -126,52 +125,27 @@
             }
         </script>
     </head>
-    <body onload="funciones()">
+    <body onLoad="funciones()">
         <!-- dothird(); para cargar otra accion en el body -->
         <div class="contenedor">
             <div class="encabezado">
-                <h1>Mobile Hunt - Proyecto Terminal
-                    <br />Ingeniería en Computación UAM Azcapotzalco</h1>
+                <h1 id="title">Proyecto: Mobile Hunt</h1><br>
+                <h1 id="title2">UAM Azcapotzalco</h1>
             </div>
             <div class="menu">
-                <div class="encabezadoMenu"><h1>Panel de Administración</h1>
-                    <a href="javascript:history.go(-1)">&lt&ltatrás</a>
-                    |
-                    <a href="index.php">Principal</a>
-                    <div class="fechaMenu"><?php $fecha=date("d/m/y"/*." "."h:i:s"*/); echo $fecha;?> </div><!--fecha-->
-                    <div class="relojMenu" id="relojMenu"></div>
-                </div>
-
-                <div class="formulario" id="formulario" style="overflow:auto">
-                    <!--           div form
-                    <div class="usr" id="usr" style="overflow:auto">
-                    div usr
-                    </div>
-                    -->
-                    <!-- verificamos si existe restricción guardada
-                    -->
-                    <?php
-                        include('conectar.php');
-                        $idUsr=$_REQUEST['usr'];
-                        $_SESSION['idUsr']=$idUsr;
-                        $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$_SESSION['idUsr']."'";
-                        echo "<br>".$query."<br>";
-                        $result=mysql_query($query);
-                        $row=mysql_fetch_array($result);
-                        if($row[0]!=null){
-                            $js=$row[0];
-                            echo '<script type="text/javascript">'.$js.'</script>';
-                            echo '<input type="checkbox" name="chkboxRes"  onclick="showRestriccion(this)" >Mostrar Restricción</input>';
-                            echo '<script type="text/javascript">hayRestriccion=1;</script>';
-                        }
-                        else{
-                            echo "<br>El usuario:".$_SESSION['usr']." no tiene restricción de área";
-                            echo '<script type="text/javascript">hayRestriccion=0;</script>';
-                        }
-                    ?>
-                    <button type="button" align="center" onclick="abrirPag('v3tool_restricciones.html')">Establecer Restricción</button><br />
-                    <input type="checkbox" name="chkboxRuta"  onclick="loadKml(this)" >Mostrar Ruta</input>
+                <div class="encabezadoMenu"><h2>Panel de Administración</h2></div>
+                <nav>
+                <ul>
+                    <li><a href="javascript:history.go(-1)">atrás</a></li>
+                    <li><a href="index.php">Principal</a></li>
+                </ul>
+                <div class="relojMenu" id="relojMenu"></div>
+                <div class="fechaMenu"><?php $fecha=date("d/m/y"/*." "."h:i:s"*/); echo $fecha;?> </div>
+                <div class="formulario" id="formulario">
+                    <!-- verificamos si existe restricción guardada-->
                     <?php obtenerDatos();?>
+                    
+                                       
                 </div>
             </div>
             <div class="mapa" id="map_canvas">Mapa</div>
@@ -201,6 +175,27 @@
                 echo"<br>Institucion/Compania:".$_SESSION['idInsti']."- $nomInsti <br>";
                 echo"Nombre de Usuario: ".$_SESSION['idUsr']." - $nomUsr <br>";
                 echo"Fecha:".$fechaQuery."<br>";
+                
+                //Ruta y Restricción
+                 $idUsr=$_REQUEST['usr'];
+                 $_SESSION['idUsr']=$idUsr;
+                 $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$_SESSION['idUsr']."'";
+                        //echo "<br>".$query."<br>";
+                        $result=mysql_query($query);
+                        $row=mysql_fetch_array($result);
+                        if($row[0]!=null){
+                            $js=$row[0];
+                            echo '<script type="text/javascript">'.$js.'</script>';
+                            echo '<input type="checkbox" name="chkboxRes"  onclick="showRestriccion(this)" >Mostrar Restricción</input>';
+                            echo '<script type="text/javascript">hayRestriccion=1;</script>';
+                        }
+                        else{
+                            echo "<br>El usuario:".$_SESSION['usr']." no tiene restricción de área";
+                            echo '<script type="text/javascript">hayRestriccion=0;</script>';
+                        }
+						echo  "<br><button type='button' align='center' onClick='abrirPag('v3tool_restricciones.html')'>Establecer Restricción</button><br />";
+						echo "<input type='checkbox' name='chkboxRuta'  onclick='loadKml(this)' >Mostrar Ruta</input>";
+                
                 //puntos segun idUsr
                 /*consulta original
                 $result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND fecha='".$fechaQuery."'") or die("error".mysql_error());
@@ -217,7 +212,7 @@
                     echo "<td><b>Latitud (y)</b></td> ";
                     echo "<td><b>Longitud (x)</b></td> ";
                     echo "<td><b>Fecha y hora</b></td> ";
-                    echo "<td><b>Provedor de localización</b></td> ";
+                    echo "<td><b>Provedor</b></td> ";
                     echo "</tr> ";
                     //datos
                     while ($row=mysql_fetch_array($query)){
@@ -226,8 +221,8 @@
                         echo "<td>$row[1]</td> ";
                         echo "<td>$row[2]</td> ";
                         echo "<td>$row[3]</td> ";
-                        $fecha=preg_replace("(_PROVIDER)","",$row[4]);
-                        echo "<td>$fecha</td> ";
+                        $provider=preg_replace("(_PROVIDER)","",$row[4]);
+                        echo "<td>$provider</td> ";
                         echo "</tr> ";
                     }
                     echo "</table> ";
@@ -241,8 +236,6 @@
                         echo '<script type="text/javascript">existLoc=1;</script>';
                     }
                     else 'Error en KML<script type="text/javascript">existLoc=0;</script>';
-
-
                 }
                 else{
                     echo '<script type="text/javascript">existLoc=0;</script>';
