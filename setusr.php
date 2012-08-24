@@ -37,7 +37,6 @@
         <script src="js/libs/modernizr-2.0.6.min.js"></script>
     </head>
     <body>
-
         <div id="header-container">
             <header class="wrapper clearfix">
                 <h1 id="title">Proyecto: Mobile Hunt</h1>
@@ -45,14 +44,13 @@
                 <h1 id="title2"> UAM Azcapotzalco</h1>
             </header>
         </div>
-
         <div id="main-container">   
             <div id="main" class="wrapper clearfix">			
                 <header>
                     <h2>Selecciona Usuario y Fecha de Consulta:</h2>
                 </header>
                 <article>                   
-                        <form name="frmUsr" id="frmUsr" action="getpuntosgl_1.php" onsubmit="return validar()" method="get">
+                        <form name="frmUsr" id="frmUsr" action="getpuntosgl_1.php" onSubmit="return validar()" method="get">
                             <?php 
                                 include('conectar.php');
                                 include('deletefile.php');
@@ -82,7 +80,10 @@
                                     $option=$option."<option value='$row[0]'>$row[0] $row[1]</option>";
                                 }
                                 //echo"Institucion/Compañia:<br> <input type='text' name='nomInsti' id='nomInsti' disabled='disabled' value='$nomInsti'/><br>";
-                                echo"Selecciona de la siguiente lista el nombre de usuario que identifica al dispositivo móvil que desas ubicar:<br> <select name='usr' id='usr' >$option</select><br>";
+                                echo"Selecciona el nombre de usuario que identifica al dispositivo móvil que desas ubicar, así como la fecha de consulta.<br>
+                                <b>Institución/Compañia:<br>".$nomInsti."<br><br>
+                                Usuario:
+                                <br><select name='usr' id='usr' >$option</select><br><br>";
                                 //pasamos variable de php a javascript           
 //                                echo 
 //                                "<script languaje='JavaScript'>
@@ -90,8 +91,7 @@
 //                                </script>";
                                 mysql_close($con);                
                             ?>
-                            <br>Elige la fecha de consulta:<br>
-                            Día (dd-mm-aaaa)<br>
+                            Fecha de consulta(dd-mm-aaaa):</b><br>
                             <input type="text" required="required" name="fecha" id="dateArrival" class="auto-kal" data-kal="format:'DD-MM-YYYY', weekStart:'1', selected:Kalendae.moment()" size="10"><br>
                             <!--
                             <input name="fecha" type="text" id="dateArrival" onClick="popUpCalendar(this, frmUsr.dateArrival, 'dd-mm-yyyy',minYear);" size="10" ><br><br>
@@ -102,14 +102,12 @@
                 <aside>
                     <nav>
                         <ul>
-                            <li><a href="javascript:history.go(-1)">anterior</a></li>
+                            <li><a href="javascript:history.go(-1)">&lt&lt atrás</a></li>
                             <!--                		<li><a href="index.php">Principal</a></li>
                             --> 
                         </ul>
                     </nav> 
-                    <br>
-
-                    <h3>Descripción</h3>
+                    <br><h3>Descripción</h3>
                     <p>	Mobile Hunt es el nombre del Proyecto Terminal desarrollado para la obtención del grado académico de Ingeniero en Computación por parte de la Universidad Autónoma Metropolitana Unidad Azcapotzalco (UAM-A).</p>
                     <p>Este proyecto  fué diseñado e implementado por el alumno <b>Jorge Raymundo Castillo Velázquez</b> con ayuda y asesoría del <b>Ing. Marío Alberto Lagos Acosta</b>.</p>
                     <p>El Proyecto consta de:
@@ -120,18 +118,14 @@
                         </ul>				  
                     </p>
                 </aside>
-
             </div> <!-- #main -->
         </div> <!-- #main-container -->
-
         <div id="footer-container">
             <footer class="wrapper">
                 <!--Botones Sociales-->            
-
                 <div id="fb-root"></div>
                 <div id="plusone-div"></div>
                 <div class="fb-like"></div>
-
                 <script type="text/javascript">
                     function renderPlusone() {
                         gapi.plusone.render("plusone-div");}
@@ -146,11 +140,9 @@
                         renderPlusone();
                         renderIlike();}
                 </script>
-
                 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"{"parsetags": "onload"}>
                 </script>            
             </footer>
         </div>
-
     </body>
 </html>
