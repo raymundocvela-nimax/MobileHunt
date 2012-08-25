@@ -146,7 +146,7 @@
                 <?
                     //Restricción
                     include('conectar.php');
-                    
+
 
                     //adecuar ID usr
                     $nomInsti=$_SESSION['nomInsti'];
@@ -164,10 +164,10 @@
                     $row=mysql_fetch_array($result);
                     $nomUsr=$row[0];
                     $_SESSION['nomUsr']=$nomUsr;
-                    echo"<br><br><br><b>Institucion/Compania: $nomInsti<br>";
+                    echo"<br><br><b>Institucion/Compania: $nomInsti<br>";
                     echo"Nombre de Usuario: $nomUsr <br>";
                     echo"Fecha:".$fechaQuery."<br></b>";
-                    echo"<p>A continuación, si así es el caso, se muestran las ubicaciones registradas según los parámetros seleccionados; así mismo se brinda la opción de ver la restricción de área y las ubicaciones en el mapa de la derecha.</p><br>";
+                    echo"<p>A continuación, si es el caso, se muestran las ubicaciones registradas según los parámetros seleccionados; así mismo se brinda la opción de mostrar la restricción de área y las ubicaciones en el mapa de la derecha.</p>";
                     $idUsr=$_REQUEST['usr'];
                     $_SESSION['idUsr']=$idUsr;
                     $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$_SESSION['idUsr']."'";
@@ -183,14 +183,13 @@
                         echo  "";
                     }
                     else{
-                        echo "<br>El usuario:".$nomUsr." no cuenta con restricción de área";
+                        echo "<br>El usuario:".$nomUsr." no cuenta con restricción de área<br>";
                         echo '<script type="text/javascript">hayRestriccion=0;</script>';
-                        
                     }
                 ?>
-                <button type="button" align="center" onClick="abrirPag('v3tool_restricciones.html')">Establecer Restricción</button><br /> 
+                <button type="button" align="center" onClick="abrirPag('v3tool_restricciones.html')">Establecer Restricción</button><br />
                 <input type="checkbox" name="chkboxRuta"  onclick="loadKml(this)" >Mostrar Ruta </input>
-                </div>                   
+                </div>
                 <div class="formulario" id="formulario">
                     <!-- verificamos si existe restricción guardada-->
                     <?php obtenerDatos();?>
