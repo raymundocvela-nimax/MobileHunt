@@ -132,15 +132,17 @@
                 <h1 id="title">Proyecto: Mobile Hunt</h1><br>
                 <h1 id="title2">UAM Azcapotzalco</h1>
             </div>
-            <div class="menu">
+            <div class="menu" align="center">
                 <div class="encabezadoMenu"><h2>Panel de Administración</h2></div>
                 <nav>
                 <ul>
                     <li><a href="javascript:history.go(-1)">atrás</a></li>
                     <li><a href="index.php">Principal</a></li>
                 </ul>
+                </nav>
                 <div class="relojMenu" id="relojMenu"></div>
                 <div class="fechaMenu"><?php $fecha=date("d/m/y"/*." "."h:i:s"*/); echo $fecha;?> </div>
+                <div id="user" align="justify">
                 <?
                     //Restricción
                     include('conectar.php');
@@ -178,15 +180,17 @@
                         echo '<script type="text/javascript">'.$js.'</script>';
                         echo '<script type="text/javascript">hayRestriccion=1;</script>';
                         echo '<input type="checkbox" name="chkboxRes"  onclick="showRestriccion(this)" >Mostrar Restricción</input>';
-                        echo  "<button type='button' align='center' onClick='abrirPag('v3tool_restricciones.html')'>Cambiar Restricción</button><br />";
+                        echo  "";
                     }
                     else{
                         echo "<br>El usuario:".$nomUsr." no cuenta con restricción de área";
                         echo '<script type="text/javascript">hayRestriccion=0;</script>';
-                        echo  "<br><button type='button' align='center' onClick='abrirPag('v3tool_restricciones.html')'>Establecer Restricción</button><br />";
+                        
                     }
-                ?> 
-                <input type='checkbox' name='chkboxRuta'  onclick='loadKml(this)' >Mostrar Ruta </input>                                  
+                ?>
+                <button type="button" align="center" onClick="abrirPag('v3tool_restricciones.html')">Establecer Restricción</button><br /> 
+                <input type="checkbox" name="chkboxRuta"  onclick="loadKml(this)" >Mostrar Ruta </input>
+                </div>                   
                 <div class="formulario" id="formulario">
                     <!-- verificamos si existe restricción guardada-->
                     <?php obtenerDatos();?>
