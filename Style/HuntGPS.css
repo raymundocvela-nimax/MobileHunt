@@ -7,7 +7,8 @@ body {
 	background-repeat:repeat-x;*/
 	background-color:#068fbd;
 	/*margin:;/* no dejara espacion entre el DIV y el BODY*/
-	font-family: sans-serif;  color: #FFF;
+	font-family: sans-serif;
+	color: #FFF;
 	/*font-family:Georgia, "Times New Roman", Times, serif;/*Indicamos la familia de letra que usara en todo nuestro sitio ARIAL Y HELVETICA SIEMPRE ESTARAN*/
 	text-align:center; /******Este debe estar para que se pueda centrar el contenedor principal*/
 }
@@ -52,7 +53,7 @@ nav a:hover{
 .pie{
 	width:100%;
 	height:5%;
-float:left;
+	float:left;
 	background-color:#666;
 }
 
@@ -73,16 +74,17 @@ h1{
 
 .contenido h2, .contenido h3{
 	color:#F0C;
+	text-align:center;
 }
 
 .menu{
 	overflow:hidden;
 	width:30%;
-	height:80%;
-float:left;
+	height:84%;
+	float:left;
 	background-color:#068FBD;
-	/*padding-top:10px;
-	padding-left:10px;*/
+	text-align:justify;
+	padding-top:5pz;
 }
 
 .encabezadoMenu{
@@ -101,24 +103,25 @@ float:left;
 .fechaMenu{
 	float:left;
 	text-align:right;
+	padding-top:10px;
 	/*background-color:#00F;
-	/*padding-top:10px;
+	
 	padding-left:10px;*/
 }
 
 .relojMenu{
 		float:left;
 	text-align:left;
+	padding-top:10px;
 	/*background-color:#F0F;
-	/*padding-top:10px;
 	padding-left:10px;*/
 }
 
 .formulario{
 	width:100%;
-	height:600px;
+	height:500px;
 	display:block;
-	overflow:scroll;
+	overflow-y:auto;
 	/*padding-top:10px;
 	padding-left:10px;*/
 	text-align:justify;
@@ -136,8 +139,7 @@ float:left;
 
 .mapa{
 	width:70%;
-	height:80%;
+	height:84%;
 	float:left;
 	background-color:#F00;
 }
-

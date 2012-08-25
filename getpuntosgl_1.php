@@ -42,7 +42,7 @@
                 if(hora < 10) hora = '0' + hora;
                 if(minuto < 10) minuto = '0' + minuto;
                 if(segundo < 10) segundo = '0' + segundo;
-                HoraCompleta= hora + " : " + minuto + " : " + segundo;
+                HoraCompleta= hora + ":" + minuto + ":" + segundo+" - ";
                 document.getElementById('relojMenu').innerHTML = HoraCompleta;
                 setTimeout("HoraActual("+hora+", "+minuto+", "+segundo+")", 1000);
             }
@@ -141,11 +141,55 @@
                 </ul>
                 <div class="relojMenu" id="relojMenu"></div>
                 <div class="fechaMenu"><?php $fecha=date("d/m/y"/*." "."h:i:s"*/); echo $fecha;?> </div>
+                <?
+                    //Restricción
+                    include('conectar.php');
+                    
+
+                    //adecuar ID usr
+                    $nomInsti=$_SESSION['nomInsti'];
+                    //$_SESSION['idUsr']=$idUsr;
+
+                    //recuperar fecha
+                    $fechaExplode=explode('-',$_REQUEST['fecha']);
+                    //$fechaQuery=date('Y-m-d',mktime(0,0,0,$fechaExplode[1],$fechaExplode[0],$fechaExplode[2]));
+                    $fechaQuery=date('d-m-Y',mktime(0,0,0,$fechaExplode[1],$fechaExplode[0],$fechaExplode[2]));
+                    //echo $fechaQuery."<br>";
+                    //print_r $fechaQuery;
+
+                    //obtener nombre Usr segun id
+                    $result=mysql_query("SELECT usuario FROM usuarios WHERE idusuarios='".$_SESSION['idUsr']."'") or die("error".mysql_error());
+                    $row=mysql_fetch_array($result);
+                    $nomUsr=$row[0];
+                    $_SESSION['nomUsr']=$nomUsr;
+                    echo"<br><br><br><b>Institucion/Compania: $nomInsti<br>";
+                    echo"Nombre de Usuario: $nomUsr <br>";
+                    echo"Fecha:".$fechaQuery."<br></b>";
+                    echo"<p>A continuación, si así es el caso, se muestran las ubicaciones registradas según los parámetros seleccionados; así mismo se brinda la opción de ver la restricción de área y las ubicaciones en el mapa de la derecha.</p><br>";
+                    $idUsr=$_REQUEST['usr'];
+                    $_SESSION['idUsr']=$idUsr;
+                    $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$_SESSION['idUsr']."'";
+                    //echo "<br>".$query."<br>";
+                    $result=mysql_query($query);
+                    $row=mysql_fetch_array($result);
+                    echo "<b>";
+                    if($row[0]!=null){
+                        $js=$row[0];
+                        echo '<script type="text/javascript">'.$js.'</script>';
+                        echo '<script type="text/javascript">hayRestriccion=1;</script>';
+                        echo '<input type="checkbox" name="chkboxRes"  onclick="showRestriccion(this)" >Mostrar Restricción</input>';
+                        echo  "<button type='button' align='center' onClick='abrirPag('v3tool_restricciones.html')'>Cambiar Restricción</button><br />";
+                    }
+                    else{
+                        echo "<br>El usuario:".$nomUsr." no cuenta con restricción de área";
+                        echo '<script type="text/javascript">hayRestriccion=0;</script>';
+                        echo  "<br><button type='button' align='center' onClick='abrirPag('v3tool_restricciones.html')'>Establecer Restricción</button><br />";
+                    }
+                ?> 
+                <input type='checkbox' name='chkboxRuta'  onclick='loadKml(this)' >Mostrar Ruta </input>                                  
                 <div class="formulario" id="formulario">
                     <!-- verificamos si existe restricción guardada-->
                     <?php obtenerDatos();?>
-                    
-                                       
                 </div>
             </div>
             <div class="mapa" id="map_canvas">Mapa</div>
@@ -172,30 +216,7 @@
                 $row=mysql_fetch_array($result);
                 $nomUsr=$row[0];
                 $_SESSION['nomUsr']=$nomUsr;
-                echo"<br>Institucion/Compania:".$_SESSION['idInsti']."- $nomInsti <br>";
-                echo"Nombre de Usuario: ".$_SESSION['idUsr']." - $nomUsr <br>";
-                echo"Fecha:".$fechaQuery."<br>";
-                
-                //Ruta y Restricción
-                 $idUsr=$_REQUEST['usr'];
-                 $_SESSION['idUsr']=$idUsr;
-                 $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$_SESSION['idUsr']."'";
-                        //echo "<br>".$query."<br>";
-                        $result=mysql_query($query);
-                        $row=mysql_fetch_array($result);
-                        if($row[0]!=null){
-                            $js=$row[0];
-                            echo '<script type="text/javascript">'.$js.'</script>';
-                            echo '<input type="checkbox" name="chkboxRes"  onclick="showRestriccion(this)" >Mostrar Restricción</input>';
-                            echo '<script type="text/javascript">hayRestriccion=1;</script>';
-                        }
-                        else{
-                            echo "<br>El usuario:".$_SESSION['usr']." no tiene restricción de área";
-                            echo '<script type="text/javascript">hayRestriccion=0;</script>';
-                        }
-						echo  "<br><button type='button' align='center' onClick='abrirPag('v3tool_restricciones.html')'>Establecer Restricción</button><br />";
-						echo "<input type='checkbox' name='chkboxRuta'  onclick='loadKml(this)' >Mostrar Ruta</input>";
-                
+
                 //puntos segun idUsr
                 /*consulta original
                 $result=mysql_query("SELECT idpuntos,longitud,latitud,fecha,provider FROM puntos WHERE usuarios_idUsuarios='".$idUsr."' AND fecha='".$fechaQuery."'") or die("error".mysql_error());
@@ -205,7 +226,7 @@
                 $numRow=mysql_num_rows($query);
                 if($numRow!=0){
                     //creamos tabla
-                    echo "<table border = '1'> ";
+                     echo "<table align='center' border = '1'> ";
                     //nombre filas
                     echo "<tr> ";
                     echo "<td><b>ID</b></td> ";
@@ -214,7 +235,6 @@
                     echo "<td><b>Fecha y hora</b></td> ";
                     echo "<td><b>Provedor</b></td> ";
                     echo "</tr> ";
-                    //datos
                     while ($row=mysql_fetch_array($query)){
                         echo "<tr> ";
                         echo "<td>$row[0]</td> ";
