@@ -146,11 +146,10 @@
                 <?
                     //Restricción
                     include('conectar.php');
-
-
+                    $idUsr=$_REQUEST['idUsr'];
                     //adecuar ID usr
-                    $nomInsti=$_SESSION['nomInsti'];
-                    //$_SESSION['idUsr']=$idUsr;
+                    //$nomInsti=$_SESSION['nomInsti'];
+                    $_SESSION['idUsr']=$idUsr;
 
                     //recuperar fecha
                     $fechaExplode=explode('-',$_REQUEST['fecha']);
@@ -160,17 +159,18 @@
                     //print_r $fechaQuery;
 
                     //obtener nombre Usr segun id
-                    $result=mysql_query("SELECT usuario FROM usuarios WHERE idusuarios='".$_SESSION['idUsr']."'") or die("error".mysql_error());
+                    $result=mysql_query("SELECT usuario FROM usuarios WHERE idusuarios='".$idUsr."'") or die("error".mysql_error());
                     $row=mysql_fetch_array($result);
                     $nomUsr=$row[0];
+
                     $_SESSION['nomUsr']=$nomUsr;
+                    $nomInsti=$_SESSION['nomInsti'];
                     echo"<br><br><b>Institucion/Compania: $nomInsti<br>";
                     echo"Nombre de Usuario: $nomUsr <br>";
                     echo"Fecha:".$fechaQuery."<br></b>";
                     echo"<p>A continuación, si es el caso, se muestran las ubicaciones registradas según los parámetros seleccionados; así mismo se brinda la opción de mostrar la restricción de área y las ubicaciones en el mapa de la derecha.</p>";
-                    $idUsr=$_REQUEST['usr'];
-                    $_SESSION['idUsr']=$idUsr;
-                    $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$_SESSION['idUsr']."'";
+                    $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$idUsr."'";
+                    echo "idUsr $idUsr == ".$_SESSION['idUsr']."-si?-";
                     //echo "<br>".$query."<br>";
                     $result=mysql_query($query);
                     $row=mysql_fetch_array($result);
@@ -204,7 +204,7 @@
                 include('makerutakml_1.php');
 
                 //adecuar ID usr
-                $nomInsti=$_SESSION['nomInsti'];
+                //$nomInsti=$_SESSION['nomInsti'];
                 //$_SESSION['idUsr']=$idUsr;
 
                 //recuperar fecha
@@ -215,10 +215,12 @@
                 //print_r $fechaQuery;
 
                 //obtener nombre Usr segun id
+/*
                 $result=mysql_query("SELECT usuario FROM usuarios WHERE idusuarios='".$_SESSION['idUsr']."'") or die("error".mysql_error());
                 $row=mysql_fetch_array($result);
                 $nomUsr=$row[0];
                 $_SESSION['nomUsr']=$nomUsr;
+                */
 
                 //puntos segun idUsr
                 /*consulta original
