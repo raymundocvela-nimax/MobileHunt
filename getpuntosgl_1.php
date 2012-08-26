@@ -129,11 +129,11 @@
         <!-- dothird(); para cargar otra accion en el body -->
         <div class="contenedor">
             <div class="encabezado">
-                <h1 id="title">Proyecto: Mobile Hunt</h1><br>
-                <h1 id="title2">UAM Azcapotzalco</h1>
+                <h1 id="title">Proyecto: Mobile Hunt </h1>
+                 <h1 id="title2"> - UAM Azcapotzalco</h1>
             </div>
             <div class="menu" align="center">
-                <div class="encabezadoMenu"><h2>Panel de Administración</h2></div>
+<!--                <div class="encabezadoMenu"><h2>Panel de Administración</h2></div>-->
                 <nav>
                 <ul>
                     <li><a href="javascript:history.go(-1)">atrás</a></li>
@@ -168,9 +168,8 @@
                     echo"<br><br><b>Institucion/Compania: $nomInsti<br>";
                     echo"Nombre de Usuario: $nomUsr <br>";
                     echo"Fecha:".$fechaQuery."<br></b>";
-                    echo"<p>A continuación, si es el caso, se muestran las ubicaciones registradas según los parámetros seleccionados; así mismo se brinda la opción de mostrar la restricción de área y las ubicaciones en el mapa de la derecha.</p>";
+                    echo"A continuación, si es el caso, se muestran las ubicaciones registradas según los parámetros seleccionados; así mismo se brinda la opción de mostrar la restricción de área y las ubicaciones en el mapa de la derecha.";
                     $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$idUsr."'";
-                    echo "idUsr $idUsr == ".$_SESSION['idUsr']."-si?-";
                     //echo "<br>".$query."<br>";
                     $result=mysql_query($query);
                     $row=mysql_fetch_array($result);
@@ -183,12 +182,12 @@
                         echo  "";
                     }
                     else{
-                        echo "<br>El usuario:".$nomUsr." no cuenta con restricción de área<br>";
+                        echo "<br>Este usuario no cuenta con restricción de área<br>";
                         echo '<script type="text/javascript">hayRestriccion=0;</script>';
                     }
                 ?>
                 <button type="button" align="center" onClick="abrirPag('v3tool_restricciones.html')">Establecer Restricción</button><br />
-                <input type="checkbox" name="chkboxRuta"  onclick="loadKml(this)" >Mostrar Ruta </input>
+                <input type="checkbox" name="chkboxRuta"  onclick="loadKml(this)" >Mostrar Ruta </input><br>
                 </div>
                 <div class="formulario" id="formulario">
                     <!-- verificamos si existe restricción guardada-->
@@ -237,7 +236,7 @@
                     echo "<td><b>ID</b></td> ";
                     echo "<td><b>Latitud (y)</b></td> ";
                     echo "<td><b>Longitud (x)</b></td> ";
-                    echo "<td><b>Fecha y hora</b></td> ";
+                    echo "<td><b>Fecha</b></td> ";
                     echo "<td><b>Provedor</b></td> ";
                     echo "</tr> ";
                     while ($row=mysql_fetch_array($query)){

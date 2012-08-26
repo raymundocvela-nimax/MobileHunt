@@ -14,11 +14,13 @@ body {
 }
 	#title,#title2{
 		float:left;
+		text-align:center !important;
 	}
 	#title2{ color:#F00
 	}
 .encabezado { /*nombre de nuestra clase. La diferencia entre Clase(Se repiten) y ID(Son unicos):*/
 	display:inline-block;
+	text-align:center;
 	width:100%; /*ancho. LO QUERIAMOS DE 800 PERO AGREGAMOS 5 DE PADDING ASÍ QUE SE LOS RESTAMOS*/
 	height:10%;/*altura.  LO QUERIAMOS DE 150 PERO AGREGAMOS 5 DE PADDING ASÍ QUE SE LOS RESTAMOS*/
 	background-color:#000;
@@ -70,6 +72,7 @@ h1{
 	color:#FFF;
 /*	font-size:14px;*/
 	font-family: sans-serif;  color: #FFF;
+	text-align:center;
 }
 
 .contenido h2, .contenido h3{
@@ -119,9 +122,10 @@ h1{
 
 .formulario{
 	width:100%;
-	height:500px;
+	height:150px;
 	display:block;
-	overflow-y:auto;
+	overflow-y:scroll;
+	overflow-x:auto;
 	/*padding-top:10px;
 	padding-left:10px;*/
 	text-align:justify;
