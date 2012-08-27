@@ -39,10 +39,10 @@
                                 $query="UPDATE usuarios SET restriccion='".$js."' WHERE idusuarios ='".$_SESSION['idUsr']."'";
                                 $result=mysql_query($query) or die ("error".mysql_error());
                                 if($result=1)
-                                    echo "<br>Restriccion agregada exitosamente al usuario: ".$_SESSION['nomUsr'];
-                                else echo "<br>Error al agregar restricción ".$result;
+                                    echo "<b><br>Restriccion agregada exitosamente al usuario: ".$_SESSION['nomUsr']."</b>";
+                                else echo "<b><br>Error al agregar restricción ".$result."</b>";
                             }
-                            else echo"<br>La restricción no es un código Java Script válido";
+                            else echo"<b><br>La restricción no es un código Java Script válido</b>";
                             mysql_close();
                         ?>
                     </p>
