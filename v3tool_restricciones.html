@@ -4,8 +4,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
-        <meta name = "description" content = "Online tool to create code for polyline and polygon to Google Maps v3 (version 3)"/>
-        <title>Tool for Google Maps v3 (version 3)</title>
+        <meta name = "description" content = "Establecer una Restricción de área con Google Maps v3"/>
+        <title>Proyecto: Mobile Hunt - Restricción de área</title>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
         <script type="text/javascript">
             //<![CDATA[
@@ -801,40 +801,40 @@
 
                         // change to polyline draw mode not allowed
                         if(outerArray.length > 0) { //indicates polygon with hole
-                        toolID = 2;
-                        nextshape();
-                        toolID = 1;
-                        newstart();
-                        return;
+                            toolID = 2;
+                            nextshape();
+                            toolID = 1;
+                            newstart();
+                            return;
                         }
                         if(rectangle) {
-                        toolID = 3;
-                        nextshape();
-                        toolID = 1;
-                        newstart();
-                        return;
+                            toolID = 3;
+                            nextshape();
+                            toolID = 1;
+                            newstart();
+                            return;
                         }
                         if(circle) {
-                        toolID = 4;
-                        nextshape();
-                        toolID = 1;
-                        newstart();
-                        return;
+                            toolID = 4;
+                            nextshape();
+                            toolID = 1;
+                            newstart();
+                            return;
                         }
                         if(markerShape) {
-                        toolID = 5;
-                        nextshape();
-                        toolID = 1;
-                        newstart();
-                        return;
+                            toolID = 5;
+                            nextshape();
+                            toolID = 1;
+                            newstart();
+                            return;
                         }
                         if(directionsYes == 1) {
-                        toolID = 6;
-                        nextshape();
-                        directionsYes = 0;
-                        toolID = 1;
-                        newstart();
-                        return;
+                            toolID = 6;
+                            nextshape();
+                            directionsYes = 0;
+                            toolID = 1;
+                            newstart();
+                            return;
                         }
                         placemarks[plmcur].style = polylinestyles[polylinestyles.length-1].name;
                         placemarks[plmcur].stylecur = polylinestyles.length-1;
@@ -2760,9 +2760,11 @@
                 </form>
             </div>
             <div class="choice">
+                <!--Valores Options Codigo KML o javascript-->
                 <form id="codes" style="float:left;text-align:right;padding-top:10px;" action="./" method="post" onsubmit="return false">
                     <select id="codechoice" name="codechoice" style="border:1px solid #000000;" onchange="codeID=parseInt(this.options[this.selectedIndex].value);setCode();">
-                        <option selected="selected" value="1">KML</option>
+                        <option selected="selected" value="2">Código</option>
+                        <option value="1">KML</option>
                         <option value="2">Javascript</option>
                     </select>
                 </form>
@@ -2847,15 +2849,16 @@
                 -->
                 <textarea id="coords1" name="coords1" cols="62" rows="24">
 INSTRUCCIONES:
--Elige tipo de figura. (Por el momento sólo se encuentra funcional la opción POLIGONO)
--Elige tipo de código. (Por el momento solo esta funcional la opción JAVASCRIPT)
+-Elige tipo de FIGURA. (Por el momento sólo se encuentra funcional la opción POLIGONO)
+-Elige tipo de CÖDIGO. (Por el momento solo esta funcional la opción JAVASCRIPT)
 -La página centrará el mapa en tu ubicacíón apróximada, si no es así puedes buscar una dirección.
 -Al final no olvides GUARDAR RESTRICCIÖN o CANCELAR.
                 </textarea>
                 <input type="submit" value="Guardar Restricción" />
             </form>
             <input type="button" onclick="javascript:history.go(-2)" value="<<Átras" />
-            <input type="button" onclick="index.php" value="Principal" />
+            <a href="index.php">Principal</a>
+            <!--<input type="button" onclick="index.php" value="Principal" />-->
         </div>
         <div id="polylineoptions">
             <div style="padding-top:5px; margin-bottom:10px;">
