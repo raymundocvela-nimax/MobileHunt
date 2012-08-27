@@ -65,7 +65,7 @@
                             //echo'<a href="javascript:history.go(-1)">&lt&ltatrás</a>';
                             //echo"año min $minYear <br>";
                             //adecuar valor idIns
-                            $idInsti=$_REQUEST['ins']+1;
+                            $idInsti=$_REQUEST['ins'];
                             //$_SESSION["idInsti"]=$idInsti;
                             //echo $_SESSION['idInsti'];
                             //obtener nombre Insti

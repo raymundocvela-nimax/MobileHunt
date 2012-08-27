@@ -34,12 +34,12 @@
                             <?php
                                 include('conectar.php');
                                 //institucion DISTINCT: sin repedtir
-                                $result=mysql_query("SELECT DISTINCT nombre FROM institucion") or die("error".mysql_error());
+                                $result=mysql_query("SELECT DISTINCT idinstitucion, nombre FROM institucion") or die("error".mysql_error());
                                 $option="<option value=''>Elige Institución/Compañia</option>";
-                                $cont=0;
+                                //$cont=0;
                                 while ($row=mysql_fetch_array($result)){
-                                    $option=$option."<option value='$cont'>$row[0]</option>";
-                                    $cont++;
+                                    $option=$option."<option value='$row[0]'>$row[1]</option>";
+                                    //$cont++;
                                 }
                                 echo  ("<select name='ins' id='ins'>$option</select>");
                             ?>

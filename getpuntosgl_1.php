@@ -178,8 +178,7 @@
                         $js=$row[0];
                         echo '<script type="text/javascript">'.$js.'</script>';
                         echo '<script type="text/javascript">hayRestriccion=1;</script>';
-                        echo '<input type="checkbox" name="chkboxRes"  onclick="showRestriccion(this)" >Mostrar Restricción</input>';
-                        echo  "";
+                        echo '<br><input type="checkbox" name="chkboxRes"  onclick="showRestriccion(this)" >Mostrar Restricción</input>';
                     }
                     else{
                         echo "<br>Este usuario no cuenta con restricción de área<br>";
