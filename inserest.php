@@ -1,29 +1,3 @@
-<?if (!isset($_SESSION))session_start();else echo "sesión iniciada";?>
-<!DOCTYPE html>
-<html style="height:100%" lang="es"> <!--style="height:100%" es para poder ocupar el porcentaje en el div del mapa, si no se pone el div q se genera es de altura � height 0-->
-<head>
-    <meta charset="utf-8" />
-    <meta name="description" content="Proyecto Mobile Hunt - Guardar Restricción">
-</head>
-<?php
-    $js="";
-    include('conectar.php');
-    //echo '<a href="javascript:history.go(-2)">&lt&ltRegresar</a> | ';
-    echo '<A HREF="index.php">Pagina principal</A>';
-    $js=$_REQUEST['coords1'];
-    if($js!=""){
-        $query="UPDATE usuarios SET restriccion='".$js."' WHERE idusuarios ='".$_SESSION['idUsr']."'";
-        $result=mysql_query($query) or die ("error".mysql_error());
-        if($result=1)
-            echo "<br><h1>Restriccion agregada correctamente</h1>";
-        else echo "<br>Error al agregar restriccion ".$result;
-    }
-    else echo"<br>El Java Script no contiene informacion";
-    mysql_close();
-?>
-</html>
-
-
 <?php if (!isset($_SESSION))session_start(); else echo "sesión iniciada"; ?>
 <!doctype html>
 <!--	-//1 setInst : 2 setusr -->
@@ -56,31 +30,31 @@
                 </header>
                 <article>
                     <p><?php
-    $js="";
-    include('conectar.php');
-    //echo '<a href="javascript:history.go(-2)">&lt&ltRegresar</a> | ';
-    echo '<A HREF="index.php">Pagina principal</A>';
-    $js=$_REQUEST['coords1'];
-    if($js!=""){
-        $query="UPDATE usuarios SET restriccion='".$js."' WHERE idusuarios ='".$_SESSION['idUsr']."'";
-        $result=mysql_query($query) or die ("error".mysql_error());
-        if($result=1)
-            echo "<br><h1>Restriccion agregada correctamente</h1>";
-        else echo "<br>Error al agregar restriccion ".$result;
-    }
-    else echo"<br>El Java Script no contiene informacion";
-    mysql_close();
-?>
+                            $js="";
+                            include('conectar.php');
+                            //echo '<a href="javascript:history.go(-2)">&lt&ltRegresar</a> | ';
+                            echo '<A HREF="index.php">Pagina principal</A>';
+                            $js=$_REQUEST['coords1'];
+                            if($js!=""&&(strstr($js,"google.maps.LatLng"))){
+                                $query="UPDATE usuarios SET restriccion='".$js."' WHERE idusuarios ='".$_SESSION['idUsr']."'";
+                                $result=mysql_query($query) or die ("error".mysql_error());
+                                if($result=1)
+                                    echo "<br>Restriccion agregada exitosamente";
+                                else echo "<br>Error al agregar restricción ".$result;
+                            }
+                            else echo"<br>La restricción no es un código Java Script válido";
+                            mysql_close();
+                        ?>
                     </p>
                 </article>
                 <aside>
-                    				<nav>
-                    
-                    <a href="index.php">Principal</a>
-                    
+                    <nav>
+
+                        <a href="index.php">Principal</a>
+
                     </nav>
                     <br>
-                    
+
                     <h3>Descripción</h3>
                     <p>	Mobile Hunt es el nombre del Proyecto Terminal desarrollado para la obtención del grado académico de Ingeniero en Computación por parte de la Universidad Autónoma Metropolitana Unidad Azcapotzalco (UAM-A).</p>
                     <p>Este proyecto  fué diseñado e implementado por el alumno <b>Jorge Raymundo Castillo Velázquez</b> con ayuda y asesoría del <b>Ing. Marío Alberto Lagos Acosta</b>.</p>
@@ -114,11 +88,9 @@
                         renderPlusone();
                         renderIlike();}
                 </script>
-                <script type="text/javascript" src="https://apis.google.com/js/plusone.js"{"parsetags": "onload"}>
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js">{"parsetags": "onload"}
                 </script>
             </footer>
         </div>
     </body>
 </html>
-
-

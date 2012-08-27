@@ -50,7 +50,7 @@
                     <h2>Selecciona Usuario y Fecha de Consulta:</h2>
                 </header>
                 <article>
-                    <form name="frmUsr" id="frmUsr" action="getpuntosgl_1.php" onSubmit="return validar()" method="get">
+                    <form name="frmUsr" id="frmUsr" action="getpuntosgl_1.php" onSubmit="return validar()" method="POST">
                         <?php
                             include('conectar.php');
                             include('deletefile.php');

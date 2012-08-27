@@ -30,7 +30,7 @@
                 </header>
                 <article>
                     <p>Selecciona de la siguiente lista la Institución o Compañia que identifica al dispositivo móvil que desas ubicar:<br>
-                        <form name="frmComp" id="frmComp" action="setusr.php" method="get">
+                        <form name="frmComp" id="frmComp" action="setusr.php" method="POST">
                             <?php
                                 include('conectar.php');
                                 //institucion DISTINCT: sin repedtir
