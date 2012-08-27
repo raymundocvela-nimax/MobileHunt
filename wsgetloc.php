@@ -5,15 +5,15 @@
     */
     include('conectar.php');
     $usr=$_REQUEST['usr'];
-//    echo $usr;
+    //    echo $usr;
     //obtener id usr
     $qUsr="SELECT idusuarios FROM usuarios WHERE usuario='$usr'";
- //   echo "<br>".$qUsr;
+    //   echo "<br>".$qUsr;
     $result=mysql_query($qUsr);
     $idUsr=mysql_fetch_array($result);
     //obtenemos restricción
     $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$idUsr[0]."'";
-//    echo "<br>".$query;
+    //    echo "<br>".$query;
     $result=mysql_query($query);
     $row=mysql_fetch_array($result);
     if($row[0]!=NULL){
@@ -26,7 +26,7 @@
         $js=preg_replace($pattern,"<comas>",$js);
 
 
-//        echo "<br>restricción: ".$js."--\n";
+        //        echo "<br>restricción: ".$js."--\n";
         $laty=$_REQUEST['laty'];//longitud
         $lonx=$_REQUEST['lonx'];//latitud
         //Crea el poligono

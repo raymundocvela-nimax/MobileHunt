@@ -50,54 +50,54 @@
                     <h2>Selecciona Usuario y Fecha de Consulta:</h2>
                 </header>
                 <article>
-                        <form name="frmUsr" id="frmUsr" action="getpuntosgl_1.php" onSubmit="return validar()" method="get">
-                            <?php
-                                include('conectar.php');
-                                include('deletefile.php');
-                                $file='/home/aiturbe/public_html/raymundo/files/ruta.kml';
-                                delete($file);
-                                //obtener menor año de los datos de posiciones
-                                //CAMBIAR CUANDO DB fecha este bien
-                                //$query=mysql_query("SELECT MIN(YEAR(fecha)) FROM puntos ") or die("error".mysql_error());
-                                $query=mysql_query("SELECT MAX(YEAR(fecha)) FROM puntos ") or die("error".mysql_error());
-                                $rowYear=mysql_fetch_array($query);
-                                $minYear=$rowYear[0];
-                                //echo'<a href="javascript:history.go(-1)">&lt&ltatrás</a>';
-                                //echo"año min $minYear <br>";
-                                //adecuar valor idIns
-                                $idInsti=$_REQUEST['ins']+1;
-                                //$_SESSION["idInsti"]=$idInsti;
-                                //echo $_SESSION['idInsti'];
-                                //obtener nombre Insti
-                                $result=mysql_query("SELECT nombre FROM institucion WHERE idinstitucion='".$idInsti."'") or die("error".mysql_error());
-                                $row=mysql_fetch_array($result);
-                                $nomInsti=$row[0];
-                                $_SESSION["nomInsti"]=$nomInsti;
-                                //usuarios segun idinstitucion
-                                $result=mysql_query("SELECT idusuarios,usuario FROM usuarios WHERE institucion_idinstitucion='".$idInsti."'") or die("error".mysql_error());
-                                $option="";
-                                while ($row=mysql_fetch_array($result)){
-                                    $option=$option."<option value='$row[0]'>$row[0] $row[1]</option>";
-                                }
-                                //echo"Institucion/Compañia:<br> <input type='text' name='nomInsti' id='nomInsti' disabled='disabled' value='$nomInsti'/><br>";
-                                echo"Selecciona el nombre de usuario que identifica al dispositivo móvil que desas ubicar, así como la fecha de consulta.<br>
-                                <b>Institución/Compañia:<br>".$nomInsti."<br><br>
-                                Usuario:
-                                <br><select name='idUsr' id='idUsr' >$option</select><br><br>";
-                                //pasamos variable de php a javascript
-//                                echo
-//                                "<script languaje='JavaScript'>
-//                                var minYear='".$minYear."';
-//                                </script>";
-                                mysql_close($con);
-                            ?>
-                            Fecha de consulta(dd-mm-aaaa):</b><br>
-                            <input type="text" required="required" name="fecha" id="dateArrival" class="auto-kal" data-kal="format:'DD-MM-YYYY', weekStart:'1', selected:Kalendae.moment()" size="10"><br>
-                            <!--
-                            <input name="fecha" type="text" id="dateArrival" onClick="popUpCalendar(this, frmUsr.dateArrival, 'dd-mm-yyyy',minYear);" size="10" ><br><br>
-                            -->
-                            <input type="submit" value="aceptar" align="center" />
-                        </form>
+                    <form name="frmUsr" id="frmUsr" action="getpuntosgl_1.php" onSubmit="return validar()" method="get">
+                        <?php
+                            include('conectar.php');
+                            include('deletefile.php');
+                            $file='/home/aiturbe/public_html/raymundo/files/ruta.kml';
+                            delete($file);
+                            //obtener menor año de los datos de posiciones
+                            //CAMBIAR CUANDO DB fecha este bien
+                            //$query=mysql_query("SELECT MIN(YEAR(fecha)) FROM puntos ") or die("error".mysql_error());
+                            $query=mysql_query("SELECT MAX(YEAR(fecha)) FROM puntos ") or die("error".mysql_error());
+                            $rowYear=mysql_fetch_array($query);
+                            $minYear=$rowYear[0];
+                            //echo'<a href="javascript:history.go(-1)">&lt&ltatrás</a>';
+                            //echo"año min $minYear <br>";
+                            //adecuar valor idIns
+                            $idInsti=$_REQUEST['ins']+1;
+                            //$_SESSION["idInsti"]=$idInsti;
+                            //echo $_SESSION['idInsti'];
+                            //obtener nombre Insti
+                            $result=mysql_query("SELECT nombre FROM institucion WHERE idinstitucion='".$idInsti."'") or die("error".mysql_error());
+                            $row=mysql_fetch_array($result);
+                            $nomInsti=$row[0];
+                            $_SESSION["nomInsti"]=$nomInsti;
+                            //usuarios segun idinstitucion
+                            $result=mysql_query("SELECT idusuarios,usuario FROM usuarios WHERE institucion_idinstitucion='".$idInsti."'") or die("error".mysql_error());
+                            $option="";
+                            while ($row=mysql_fetch_array($result)){
+                                $option=$option."<option value='$row[0]'>$row[0] $row[1]</option>";
+                            }
+                            //echo"Institucion/Compañia:<br> <input type='text' name='nomInsti' id='nomInsti' disabled='disabled' value='$nomInsti'/><br>";
+                            echo"Selecciona el nombre de usuario que identifica al dispositivo móvil que desas ubicar, así como la fecha de consulta.<br>
+                            <b>Institución/Compañia:<br>".$nomInsti."<br><br>
+                            Usuario:
+                            <br><select name='idUsr' id='idUsr' >$option</select><br><br>";
+                            //pasamos variable de php a javascript
+                            //                                echo
+                            //                                "<script languaje='JavaScript'>
+                            //                                var minYear='".$minYear."';
+                            //                                </script>";
+                            mysql_close($con);
+                        ?>
+                        Fecha de consulta(dd-mm-aaaa):</b><br>
+                        <input type="text" required="required" name="fecha" id="dateArrival" class="auto-kal" data-kal="format:'DD-MM-YYYY', weekStart:'1', selected:Kalendae.moment()" size="10"><br>
+                        <!--
+                        <input name="fecha" type="text" id="dateArrival" onClick="popUpCalendar(this, frmUsr.dateArrival, 'dd-mm-yyyy',minYear);" size="10" ><br><br>
+                        -->
+                        <input type="submit" value="aceptar" align="center" />
+                    </form>
                 </article>
                 <aside>
                     <nav>
@@ -140,7 +140,7 @@
                         renderPlusone();
                         renderIlike();}
                 </script>
-                <script type="text/javascript" src="https://apis.google.com/js/plusone.js"{"parsetags": "onload"}>
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js">{"parsetags": "onload"}
                 </script>
             </footer>
         </div>

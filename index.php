@@ -89,7 +89,8 @@
                         renderPlusone();
                         renderIlike();}
                 </script>
-                <script type="text/javascript" src="https://apis.google.com/js/plusone.js"{"parsetags": "onload"}>
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+                    {"parsetags": "onload"}
                 </script>
             </footer>
         </div>

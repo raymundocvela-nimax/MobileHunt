@@ -1,8 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="es">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="UTF-8"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name = "description" content = "Establecer una Restricción de área con Google Maps v3"/>
         <title>Proyecto: Mobile Hunt - Restricción de área</title>
@@ -2454,7 +2453,14 @@
                 gob('coords1').value = 'Da click en el mapa para ir agregando los vétices del poligono';
             }
             function polygonintroduction() {
-                gob('coords1').value = 'POLÏGONO: Da click en el mapa para ir agregando los vétices del poligono';
+                gob('coords1').value = 'POLÏGONO:'
+				+'-Elige la sintaxis del CÖDIGO.\n'
+				+' (Por el momento solo es funcional la opción JAVASCRIPT)\n'
+				+'-Da click en el mapa para ir agregando los vétices del poligono\n'
+				+'-La página centrará el mapa en tu ubicacíón apróximada, si no es así puedes buscar una dirección.\n'
+				+'-Al final no olvides GUARDAR LA RESTRICCIÖN o CANCELAR.';
+
+
             }
             function rectangleintroduction() {
                 gob('coords1').value = 'RECTÄNGULO: Da sólo 2 click en el mapa para agregando los vétices del rectángulo'+
@@ -2495,8 +2501,8 @@
             }
             #presenter {
                 opacity:0.7;
-                filter:alpha(opacity=70);
-                -ms-filter:”alpha(opacity=70)”;
+                filter:"alpha(opacity=70)";
+                -ms-filter:"alpha(opacity=70)";
                 -moz-opacity:0.7;
                 KHTMLOpacity: 0.7;
                 MozOpacity: 0.7;
@@ -2526,12 +2532,12 @@
                 background-color: #ffffff;
             }
             #map_canvas {
-                position: absolute;
-                top: 50px;
-                left: 0px;
-                width: 530px;
-                height: 530px;
-                background-color: #ffffff;
+	position: absolute;
+	top: 50px;
+	left: 8px;
+	width: 530px;
+	height: 530px;
+	background-color: #ffffff;
             }
             #polygonstuff {
                 position: absolute;
@@ -2554,12 +2560,13 @@
                 float: left;
             }
             h1 {
-                font-size:25px;
-                font-weight: bold;
-                color: #ff0000;
-                padding-top: 4px;
-                padding-left: 10px;
-                padding-bottom: 11px;
+	color: #000000;
+	padding-top: 4px;
+	padding-left: 10px;
+	padding-bottom: 11px;
+	font-family: sans-serif;
+	font-size: 2em;
+	font-weight: bold;
             }
             .topbutton {
                 padding-top: 10px;
@@ -2734,11 +2741,11 @@
 
         <div id="map_canvas"></div>
         <div id="header">
-            <!--
+
             <div id="title">
-            <h1>Google Maps API v3 Tool</h1>
+            <h1>Restricción de área</h1>
             </div>
-            -->
+
             <div class="choice">
                 <form id="tools" style="float:left;text-align:right;padding:10px 0px 0px 10px;" action="./" method="post" onsubmit="return false">
 
@@ -2842,24 +2849,27 @@
             </div>
         </div>
         <div id="presenter">
-            <form name ="frmText" style="margin-bottom:5px" action="inserest.php" method="post">
+          <form name ="frmText" style="margin-bottom:5px" action="inserest.php" method="post">
                 <!--
                 &nbsp;&nbsp;&nbsp;Live code presentation in textarea (below):
                 <input type="checkbox" name="showcodemode" id="presentcode" value="yes" onclick="showCodeintextarea();" checked="checked" />
                 -->
-                <textarea id="coords1" name="coords1" cols="62" rows="24">
+            <textarea id="coords1" name="coords1" cols="62" rows="24">
 INSTRUCCIONES:
 -Elige tipo de FIGURA. (Por el momento sólo se encuentra funcional la opción POLIGONO)
 -Elige tipo de CÖDIGO. (Por el momento solo esta funcional la opción JAVASCRIPT)
 -La página centrará el mapa en tu ubicacíón apróximada, si no es así puedes buscar una dirección.
 -Al final no olvides GUARDAR RESTRICCIÖN o CANCELAR.
                 </textarea>
-                <input type="submit" value="Guardar Restricción" />
-            </form>
+            <input type="submit" value="Guardar Restricción" />
             <input type="button" onclick="javascript:history.go(-2)" value="<<Átras" />
             <a href="index.php">Principal</a>
+          </form>
+            <a href="index.php"></a>
             <!--<input type="button" onclick="index.php" value="Principal" />-->
-        </div>
+          <span style="margin-bottom:5px">
+
+        </span></div>
         <div id="polylineoptions">
             <div style="padding-top:5px; margin-bottom:10px;">
                 <div style="float:left;" class="styletitle">POLYLINE</div>
