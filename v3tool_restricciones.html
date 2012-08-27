@@ -1,13 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="es">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="UTF-8"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name = "description" content = "Establecer una Restricción de área con Google Maps v3"/>
-        <title>Proyecto: Mobile Hunt - Restricción de área</title>
+        <title>Proyecto: Mobile Hunt - UAM Azcapotzalco</title>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-        <script type="text/javascript">
+    <script type="text/javascript">
             //<![CDATA[
 
             // This application is provided by Kjell Scharning
@@ -2477,8 +2476,10 @@
         <style type="text/css">
             * {margin:0;padding:0;border:0;outline:0}
             BODY {
-                font-family: "Trebuchet MS", Arial,Helvetica,Sans Serif;
-                font-size: 10pt;
+	font-family: "Sans Serif";
+	font-size: 10pt;
+                background-color:# ;
+	background-color: #666;
             }
             a  {
                 text-decoration : none;
@@ -2495,43 +2496,48 @@
             }
             #presenter {
                 opacity:0.7;
-                filter:alpha(opacity=70);
-                -ms-filter:”alpha(opacity=70)”;
+                filter:"alpha(opacity=70)";
+                -ms-filter:"alpha(opacity=70)";
                 -moz-opacity:0.7;
                 KHTMLOpacity: 0.7;
                 MozOpacity: 0.7;
                 -khtml-opacity:.70;
             }
             #buttonrow {
-                position: absolute;
-                top: 50px;
-                left: 540px;
-                width: 505px;
-                height: 80px;
+	position: absolute;
+	top: 91px;
+	left: 540px;
+	width: 492px;
+	height: 67px;
             }
             #presenter {
-                position: absolute;
-                top: 160px;
-                left: 540px;
-                width: 523px;
-                height: 413px;
-                border: 2px solid #ccc;
+	position: absolute;
+	top: 161px;
+	left: 540px;
+	width: 484px;
+	height: 437px;
+	border: 2px solid #ccc;
             }
             #header {
-                position: absolute;
-                top: 5px;
-                left: 10px;
-                width: 1020px;
-                height: 40px;
-                background-color: #ffffff;
+	position: absolute;
+	top: 5px;
+	left: 10px;
+	width: 1020px;
+	height: 55px;
+	background-color: #000000;
+	color: #FFF;
+	background-image: url(image/logo_uam_negromh_low.jpg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: right center;
             }
             #map_canvas {
-                position: absolute;
-                top: 50px;
-                left: 0px;
-                width: 530px;
-                height: 530px;
-                background-color: #ffffff;
+	position: absolute;
+	top: 93px;
+	left: 10px;
+	width: 530px;
+	height: 509px;
+	background-color: #ffffff;
             }
             #polygonstuff {
                 position: absolute;
@@ -2544,9 +2550,11 @@
                 visibility: hidden;
             }
             #title {
-                background-color: transparent;
-                width: 300px;
-                float: left;
+	background-color: transparent;
+	width: auto;
+	float: left;
+	display: block;
+	height: 100%;
             }
             .choice {
                 background-color: transparent;
@@ -2554,12 +2562,10 @@
                 float: left;
             }
             h1 {
-                font-size:25px;
-                font-weight: bold;
-                color: #ff0000;
-                padding-top: 4px;
-                padding-left: 10px;
-                padding-bottom: 11px;
+	font-size:25px !important;
+	font-weight: bold;
+	color: #FFFFFF;
+	padding: 10px;
             }
             .topbutton {
                 padding-top: 10px;
@@ -2727,19 +2733,31 @@
             #morelinks td {
                 padding-right: 10px;
             }
+        footer {
+	width: 1020px;
+	height:55px;
+	position:absolute;
+	left: 10px;
+	top: 604px;
+	background-color: #000;
+	background-image: url(image/logo_uam_negromh_low.jpg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: right center;
+}
         </style>
     </head>
 
     <body id="body" onload="initmap()">
 
-        <div id="map_canvas"></div>
+    <div id="map_canvas"></div>
         <div id="header">
-            <!--
-            <div id="title">
-            <h1>Google Maps API v3 Tool</h1>
-            </div>
-            -->
-            <div class="choice">
+
+
+          <h1>Restricción de área</h1>
+
+
+          <div class="choice">
                 <form id="tools" style="float:left;text-align:right;padding:10px 0px 0px 10px;" action="./" method="post" onsubmit="return false">
 
                     <select id="toolchoice"  name="toolchoice"  style="border:1px solid #000000;" onchange="toolID=parseInt(this.options[this.selectedIndex].value);setTool(); clearMap();">
@@ -2753,12 +2771,12 @@
                         <option value="3">Rectángulo</option>
                         <option value="4">Circulo</option>
                         <!--    No nos interesa esta opción
-                        <option value="5">Marker</option>
-                        <option value="6">Directions</option>
-                        -->
-                    </select>
-                </form>
-            </div>
+                            <option value="5">Marker</option>
+                            <option value="6">Directions</option>
+                            -->
+                  </select>
+              </form>
+          </div>
             <div class="choice">
                 <!--Valores Options Codigo KML o javascript-->
                 <form id="codes" style="float:left;text-align:right;padding-top:10px;" action="./" method="post" onsubmit="return false">
@@ -2775,14 +2793,16 @@
                         <option>LngLat mousemove</option>
                         <option selected="selected">LatLng mousemove</option>
                     </select>
-
+<!--No necesitmos estas opciones
                     <input type="button" style="visibility: hidden"  onclick="mapcenter();" value="Mapcenter"/>
                     <input type="text" style=" visibility: hidden; width:140px; border: 1px solid #000000;" id="centerofmap" />
                     <!--Zoom level:-->
-                    <input type="text" size="5" name="myzoom" id="myzoom" value="7" style=" visibility: hidden; width:15px; border: 1px solid #000000;" />
+          
+<!--                    <input type="text" size="5" name="myzoom" id="myzoom" value="7" style=" visibility: hidden; width:15px; border: 1px solid #000000;" />
+   -->               
                 </form>
             </div>
-        </div>
+    </div>
         <div id="buttonrow">
 
             <!--
@@ -2794,7 +2814,7 @@
 
             <div class="topbutton">
                 <input type="button" onclick="clearMap();" value="Borrar Mapa"/>
-            </div>
+          </div>
 
 
             <div class="topbutton">
@@ -2829,8 +2849,8 @@
                 <input type="text" style="border: 1px solid #000000;" size="50" name="address" value="Distrito Federal México " />
                 <input type="submit" value="Buscar" />
             </form>
-        </div>
-        <div id="polygonstuff">
+    </div>
+<!--        <div id="polygonstuff">
             <div>
                 <a style="padding-left:5px; color: #ffffff;" href="javascript:holecreator()">Hole</a>
             </div>
@@ -2840,31 +2860,34 @@
             <div>
                 <input id="multipleholes" type="button" onclick="nexthole();" value="Next hole" />
             </div>
-        </div>
+        </div>-->
         <div id="presenter">
             <form name ="frmText" style="margin-bottom:5px" action="inserest.php" method="post">
                 <!--
                 &nbsp;&nbsp;&nbsp;Live code presentation in textarea (below):
                 <input type="checkbox" name="showcodemode" id="presentcode" value="yes" onclick="showCodeintextarea();" checked="checked" />
                 -->
-                <textarea id="coords1" name="coords1" cols="62" rows="24">
+              <textarea id="coords1" name="coords1" cols="58" rows="24">
 INSTRUCCIONES:
--Elige tipo de FIGURA. (Por el momento sólo se encuentra funcional la opción POLIGONO)
--Elige tipo de CÖDIGO. (Por el momento solo esta funcional la opción JAVASCRIPT)
--La página centrará el mapa en tu ubicacíón apróximada, si no es así puedes buscar una dirección.
+-Elige tipo de FIGURA.
+ (Por el momento sólo se encuentra funcional la opción POLIGONO)
+-Elige tipo de CÖDIGO.
+ (Por el momento solo esta funcional la opción JAVASCRIPT)
+-La página centrará el mapa en tu ubicacíón apróximada;
+ si no es así puedes buscar una dirección.
 -Al final no olvides GUARDAR RESTRICCIÖN o CANCELAR.
                 </textarea>
-                <input type="submit" value="Guardar Restricción" />
             </form>
             <input type="button" onclick="javascript:history.go(-2)" value="<<Átras" />
             <a href="index.php">Principal</a>
-            <!--<input type="button" onclick="index.php" value="Principal" />-->
-        </div>
+    <!--<input type="button" onclick="index.php" value="Principal" />--><span style="margin-bottom:5px">
+    <input type="submit" value="Guardar Restricción" />
+    </span></div>
         <div id="polylineoptions">
             <div style="padding-top:5px; margin-bottom:10px;">
                 <div style="float:left;" class="styletitle">POLYLINE</div>
                 <div style="float:right;"><a class="closebutton" href="javascript:closethis('polylineoptions')">X</a></div>
-            </div>
+          </div>
             <div class="clear"></div>
             <div style="float:left; padding-left:5px; width:230px">
                 <form id="style1" style="padding-bottom:1px;" action="./" method="post" onsubmit="return false">
@@ -2893,7 +2916,7 @@ INSTRUCCIONES:
                 Style <span id="stylenumberl">1 </span>
                 <input type="button" class="buttons" name="forwards" id="forwards" value="Next" onclick="stepstyles(1);"/>
             </div>
-        </div>
+    </div>
         <div id="polygonoptions">
             <div style="padding-top:5px; margin-bottom:10px;">
                 <div style="float:left;" class="styletitle">POLYGON/RECTANGLE</div>
@@ -3175,7 +3198,7 @@ INSTRUCCIONES:
             </form>
         </div>
         <div id="dirtoppers">
-            <form action="#">
+          <form action="#">
                 &lt;Document&gt;<br />
                 &nbsp;&nbsp;&lt;name&gt;<input type="text" id="dirdoc1" value="My document" style="width:345px; border:2px solid #ccc;" /><br />
                 &nbsp;&nbsp;&lt;description&gt;<input type="text" id="dirdoc2" value="Content" style="width:312px; border:2px solid #ccc;" /><br /><br />
@@ -3195,19 +3218,23 @@ INSTRUCCIONES:
                 <input type="button" value="Close" onclick='document.getElementById("dirtoppers").value="";document.getElementById("dirtoppers").style.visibility = "hidden";'/>
             </form>
         </div>
-        <div class="clear"></div>
+    <div class="clear"></div>
         <div style="height:580px"></div>
 
         <div id = "content">
 
 
-        <script type="text/javascript">
+    <script type="text/javascript">
             var infolink_pid = 432173;
             var infolink_wsid = 0;
         </script>
         <!--script para busqueda de palabras claves en el Texto
         <script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>
         -->
-    </body>
+        <footer>
+        <h1>Ingeniería en Computación - UAM Azcapotzalco</h1>
+        </footer>
+        
+</body>
 
 </html>
