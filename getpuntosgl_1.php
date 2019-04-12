@@ -1,6 +1,10 @@
 <?php
     if (!isset($_SESSION))session_start();
     else echo "sesión iniciada";
+	date_default_timezone_set('America/Mexico_City');
+	$script_tz=date_default_timezone_get();
+	echo "\nScript----".script_tz;
+	echo "\nINI----".ini_get('date.timezone');
 ?>
 <!DOCTYPE html>
 <html style="height:100%"> <!--style="height:100%" es para poder ocupar el porcentaje en el div del mapa, si no se pone el div q se genera es de altura � height 0-->
@@ -79,7 +83,7 @@
                 var map = new google.maps.Map(document.getElementById("map_canvas"), settings)*/
                 if(existLoc==1){
                     if(chkboxRuta.checked){
-                        rutaLayer = new google.maps.KmlLayer('http://igconsultores.net/raymundo/'+rutaKml);
+                        rutaLayer = new google.maps.KmlLayer('http://tecnologianimax.com.mx/android/'+rutaKml);
                         rutaLayer.setMap(map);
                     }
                     else rutaLayer.setMap(null)
