@@ -13,7 +13,7 @@
         <title>Mobile Hunt - Mostrar Ubicación</title>
 
         <!-- API Google MAPS muestra configuración Mapa-->
-        <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+         <!--<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>   Ya no se utiliza-->
 
         <!-- Hoja de Estilo-->
         <link href="Style/HuntGPS.css" rel="stylesheet" type="text/css" />
@@ -54,6 +54,12 @@
             //    <!-- API Google MAPS muestra configuración Mapa-->
 
             //     <!-- Primer Mapa usado-->
+// ZOOM
+// 1: World
+// 5: Landmass/continent
+// 10: City
+// 15: Streets
+// 20: Buildings
             function initialize() {
                 var latlng = new google.maps.LatLng(23.919722222222223, -102.1625); //Centro del Mapa
                 var settings = {
@@ -83,8 +89,13 @@
                 var map = new google.maps.Map(document.getElementById("map_canvas"), settings)*/
                 if(existLoc==1){
                     if(chkboxRuta.checked){
-                        rutaLayer = new google.maps.KmlLayer('http://tecnologianimax.com.mx/android/'+rutaKml);
-                        rutaLayer.setMap(map);
+                        // rutaLayer = new google.maps.KmlLayer('http://tecnologianimax.com.mx/android/'+rutaKml);
+                        // rutaLayer.setMap(map);
+						rutaLayer = new google.maps.KmlLayer({
+						// url: 'http://tecnologianimax.com.mx/android/'+rutaKml,
+						url: 'http://tecnologianimax.com.mx/android/files/KML_Samples.kml',
+						map: map
+						});
                     }
                     else rutaLayer.setMap(null)
                     //window.open("https://maps.google.com/maps?q=http:%2F%2Figconsultores.net%2Fraymundo%2Ffiles%2F"+"1340900465.kml");
@@ -272,5 +283,7 @@
                 }
             }
         ?>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNCslXTR-8KL1t5YqOdzo7ibFxZh-VYdo&callback=initialize"
+  type="text/javascript"></script>
     </body>
 </html>
